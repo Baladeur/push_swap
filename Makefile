@@ -6,7 +6,7 @@
 #    By: tferrieu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 19:37:53 by tferrieu          #+#    #+#              #
-#    Updated: 2019/04/15 19:49:48 by tferrieu         ###   ########.fr        #
+#    Updated: 2019/04/15 19:52:42 by tferrieu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,11 @@ SRCS		=		./srcs/stack_moveset.c \
 					./srcs/stack_tools.c \
 					./srcs/stack_sorter.c
 
+SRC2		=		./srcs/checker.c
+
 OBJS		=		$(patsubst ./srcs/%.c, %o, $(SRCS))
+
+OBJ2		=		checker.o
 
 FLAGS		=		-Wall -Werror -Wextra
 
@@ -31,10 +35,10 @@ $(NAME1):	$(SRCS)
 	make -C libft
 	gcc $(FLAGS) -c $(SRCS)
 
-$(NAME2):	$(SRCS)
+$(NAME2):	$(SRCS) $(SRC2)
 	make -C libft
-	gcc $(FLAGS) -c $(SRCS) ./srcs/checker.c
-	gcc $(FLAGS) -o $(NAME2) $(OBJS) checker.o $(LIB)
+	gcc $(FLAGS) -c $(SRCS) $(SRC2)
+	gcc $(FLAGS) -o $(NAME2) $(OBJS) $(OBJ2) $(LIB)
 
 clean:
 	make -C libft clean
