@@ -6,7 +6,7 @@
 /*   By: tferrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:37:02 by tferrieu          #+#    #+#             */
-/*   Updated: 2019/04/15 19:20:40 by tferrieu         ###   ########.fr       */
+/*   Updated: 2019/04/15 20:56:55 by tferrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,6 @@ int			sort_stack(t_stack **a, t_stack **b)
 			return (0);
 		}
 		free(str);
-		ft_printf("stack a status\t: ");
-		print_stack(*a);
-		ft_printf("stack b status\t: ");
-		print_stack(*b);
-
 	}
 	free(str);
 	return (1);

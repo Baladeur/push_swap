@@ -6,7 +6,7 @@
 /*   By: tferrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 15:37:05 by tferrieu          #+#    #+#             */
-/*   Updated: 2019/04/15 18:59:56 by tferrieu         ###   ########.fr       */
+/*   Updated: 2019/04/15 20:55:47 by tferrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		is_sort(t_stack *st)
 	pos = st;
 	while (pos && pos->next)
 	{
-		if (pos->value > pos->next->value)
+		if (pos->value < pos->next->value)
 			return (0);
 		pos = pos->next;
 	}
