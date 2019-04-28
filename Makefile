@@ -6,7 +6,7 @@
 #    By: tferrieu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 19:37:53 by tferrieu          #+#    #+#              #
-#    Updated: 2019/04/15 22:10:16 by tferrieu         ###   ########.fr        #
+#    Updated: 2019/04/28 19:31:55 by tferrieu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,15 @@ SRCS		=		./srcs/stack_moveset.c \
 					./srcs/stack_tools.c \
 					./srcs/stack_sorter.c
 
-SRC1		=		./srcs/push_swap.c
+SRC1		=		./srcs/push_swap.c \
+					./srcs/brute.c
 
 SRC2		=		./srcs/checker.c
 
 OBJS		=		$(patsubst ./srcs/%.c, %.o, $(SRCS))
 
-OBJ1		=		push_swap.o
+OBJ1		=		push_swap.o \
+					brute.o
 
 OBJ2		=		checker.o
 

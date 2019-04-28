@@ -27,7 +27,7 @@ typedef struct	s_stack
 ** bruteforce psuh_swap init
 */
 
-void 			brute(t_stack *moveset, t_stack *a, t_stack *bcmp);
+void			force(t_stack *move, t_stack **a, t_stack **b);
 
 /*
 ** stack tools

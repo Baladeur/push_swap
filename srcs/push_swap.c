@@ -68,9 +68,9 @@ int			main(int ac, char **av)
 		return (write(2, "Error\n", 6));
 	}
 	moveset = NULL;
-	if (!(add_stack(&moveset, 0)))
+	if (!(add_stack(&moveset, -1)))
 		return (write(2, "Error\n", 6));
-	force(moveset, a, b);
+	force(moveset, &a, &b);
 	print_moveset(&moveset);
 	return (0);
 }
