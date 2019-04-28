@@ -40,30 +40,30 @@ static void	undo_move(t_stack *move, t_stack **a, t_stack **b)
 
 static void	exec_move(t_stack *move, t_stack **a, t_stack **b)
 {
-	if ((move->value == 0 && *a && (*a)->next) || (move->value += 1) == -1)
+	if ((move->value == 0 && *a && (*a)->next) || (move->value += 1) == -42)
 		swap(*a);
-	if ((move->value == 1 && *b && (*b)->next) || (move->value += 1) == -1)
+	if ((move->value == 1 && *b && (*b)->next) || (move->value += 1) == -42)
 		swap(*b);
 	if ((move->value == 2 && *a && (*a)->next && (*b) && (*b)->next)
 			|| (move->value += 1) == -1)
 		sswap(*a, *b);
-	if ((move->value == 3 && *a) || (move->value += 1) == -1)
+	if ((move->value == 3 && *a) || (move->value += 1) == -42)
 		push(b, a);
-	if ((move->value == 4 && *b) || (move->value += 1) == -1)
+	if ((move->value == 4 && *b) || (move->value += 1) == -42)
 		push(a, b);
-	if ((move->value == 5 && *a && (*a)->next) || (move->value += 1) == -1)
+	if ((move->value == 5 && *a && (*a)->next) || (move->value += 1) == -42)
 		rotate(a);
-	if ((move->value == 6 && *b && (*b)->next) || (move->value += 1) == -1)
+	if ((move->value == 6 && *b && (*b)->next) || (move->value += 1) == -42)
 		rotate(b);
 	if ((move->value == 7 && *a && (*a)->next && (*b) && (*b)->next)
 			|| (move->value += 1) == -1)
 		rrotate(a, b);
-	if ((move->value == 8 && *a && (*a)->next) || (move->value += 1) == -1)
+	if ((move->value == 8 && *a && (*a)->next) || (move->value += 1) == -42)
 		rev_rotate(a);
-	if ((move->value == 9 && *b && (*b)->next) || (move->value += 1) == -1)
+	if ((move->value == 9 && *b && (*b)->next) || (move->value += 1) == -42)
 		rev_rotate(b);
 	if ((move->value == 10 && *a && (*a)->next && (*b) && (*b)->next)
-			|| (move->value += 1) == -1)
+			|| (move->value += 1) == -42)
 		rev_rrotate(a, b);
 }
 
@@ -87,6 +87,13 @@ static int	brute_loop(t_stack *move, t_stack **a, t_stack **b)
 
 void		force(t_stack *move, t_stack **a, t_stack **b)
 {
+	int i;
+
+	i = 0;
 	while (!brute_loop(move, a, b))
+	{
+		printf("%d\n", i);
 		add_stack(&move, -1);
+		i++;
+	}
 }
