@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 # include "../libft/libft.h"
 
 typedef struct	s_stack
@@ -22,12 +23,6 @@ typedef struct	s_stack
 	int				value;
 	struct s_stack	*next;
 }				t_stack;
-
-/*
-** bruteforce psuh_swap init
-*/
-
-void			force(t_stack *move, t_stack **a, t_stack **b);
 
 /*
 ** stack tools
@@ -47,23 +42,23 @@ void			print_stack(t_stack *st);
 ** stack moveset
 */
 
-void			swap(t_stack *st);
+int				swap(t_stack *st);
 
-void			push(t_stack **src, t_stack **dst);
+int				push(t_stack **src, t_stack **dst);
 
-void			rotate(t_stack **st);
+int				rotate(t_stack **st);
 
-void			rev_rotate(t_stack **st);
+int				rev_rotate(t_stack **st);
 
 /*
 ** stack sorter
 */
 
-void			sswap(t_stack *a, t_stack *b);
+int				sswap(t_stack *a, t_stack *b);
 
-void			rrotate(t_stack **a, t_stack **b);
+int				rrotate(t_stack **a, t_stack **b);
 
-void			rev_rrotate(t_stack **a, t_stack **b);
+int				rev_rrotate(t_stack **a, t_stack **b);
 
 int				sort_stack(t_stack **a, t_stack **b);
 

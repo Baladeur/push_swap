@@ -12,51 +12,32 @@
 
 #include "../includes/push_swap.h"
 
-void		sswap(t_stack *a, t_stack *b)
-{
-	swap(a);
-	swap(b);
-}
-
-void		rrotate(t_stack **a, t_stack **b)
-{
-	rotate(a);
-	rotate(b);
-}
-
-void		rev_rrotate(t_stack **a, t_stack **b)
-{
-	rev_rotate(a);
-	rev_rotate(b);
-}
-
 static int	sort_loop(t_stack **a, t_stack **b, char *str, int len)
 {
 	if (len == 2 && str[0] == 's' && str[1] == 'a')
-		swap(*a);
+		return (swap(*a));
 	else if (len == 2 && str[0] == 's' && str[1] == 'b')
-		swap(*b);
+		return (swap(*b));
 	else if (len == 2 && str[0] == 's' && str[1] == 's')
-		sswap(*a, *b);
+		return (swap(*a) && swap(*b));
 	else if (len == 2 && str[0] == 'p' && str[1] == 'a')
-		push(b, a);
+		return (push(a, b));
 	else if (len == 2 && str[0] == 'p' && str[1] == 'b')
-		push(a, b);
+		return (push(b, a));
 	else if (len == 2 && str[0] == 'r' && str[1] == 'a')
-		rotate(a);
+		return (rotate(a));
 	else if (len == 2 && str[0] == 'r' && str[1] == 'b')
-		rotate(b);
+		return (rotate(b));
 	else if (len == 2 && str[0] == 'r' && str[1] == 'r')
-		rrotate(a, b);
+		return (rotate(a) && rotate(b));
 	else if (len == 3 && str[0] == 'r' && str[1] == 'r' && str[2] == 'a')
-		rev_rotate(a);
+		return (rev_rotate(a));
 	else if (len == 3 && str[0] == 'r' && str[1] == 'r' && str[2] == 'b')
-		rev_rotate(b);
+		return (rev_rotate(b));
 	else if (len == 3 && str[0] == 'r' && str[1] == 'r' && str[2] == 'r')
-		rev_rrotate(a, b);
+		return (rev_rotate(a) && rev_rotate(b));
 	else
 		return (0);
-	return (1);
 }
 
 int			sort_stack(t_stack **a, t_stack **b)

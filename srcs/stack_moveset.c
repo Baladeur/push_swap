@@ -12,28 +12,29 @@
 
 #include "../includes/push_swap.h"
 
-void	swap(t_stack *st)
+int	swap(t_stack *st)
 {
 	t_stack	*pos;
 	int		tmp;
 
 	if (!st || !(st->next))
-		return ;
+		return (1);
 	pos = st;
 	while (pos->next->next)
 		pos = pos->next;
 	tmp = pos->next->value;
 	pos->next->value = pos->value;
 	pos->value = tmp;
+	return (1);
 }
 
-void	push(t_stack **src, t_stack **dst)
+int	push(t_stack **src, t_stack **dst)
 {
 	t_stack	*pos1;
 	t_stack	*pos2;
 
 	if (!(*src))
-		return ;
+		return (1);
 	pos1 = *src;
 	while (pos1->next && pos1->next->next)
 		pos1 = pos1->next;
@@ -50,32 +51,35 @@ void	push(t_stack **src, t_stack **dst)
 		*src = NULL;
 	else
 		pos1->next = NULL;
+	return (1);
 }
 
-void	rotate(t_stack **st)
+int	rotate(t_stack **st)
 {
 	t_stack *pos;
 
 	if (!(*st) || !((*st)->next))
-		return ;
+		return (1);
 	pos = (*st);
 	while (pos->next->next)
 		pos = pos->next;
 	pos->next->next = *st;
 	*st = pos->next;
 	pos->next = NULL;
+	return (1);
 }
 
-void	rev_rotate(t_stack **st)
+int	rev_rotate(t_stack **st)
 {
 	t_stack *pos;
 
 	if (!(*st) || !((*st)->next))
-		return ;
+		return (1);
 	pos = *st;
 	while (pos->next)
 		pos = pos->next;
 	pos->next = *st;
 	*st = (*st)->next;
 	pos->next->next = NULL;
+	return (1);
 }
