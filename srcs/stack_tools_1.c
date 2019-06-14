@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_tools.c                                      :+:      :+:    :+:   */
+/*   stack_tools_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tferrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -33,6 +33,26 @@ int		add_to_stack(t_stack **st, int nb)
 	pos->value = nb;
 	*st = pos;
 	return (1);
+}
+
+t_stack	*dupe_stack(t_stack *src)
+{
+	t_stack *new;
+	t_stack *pos;
+
+	if (!(src) || !(*src))
+		return (NULL);
+	pos = src;
+	while (pos)
+	{
+		if (!(add_to_stack(&new, pos->value)))
+		{
+			destroy_stack(&new);
+			return (NULL);
+		}
+		pos = pos->next;
+	}
+	return (new);
 }
 
 void	destroy_stack(t_stack **st)

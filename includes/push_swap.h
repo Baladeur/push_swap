@@ -32,7 +32,7 @@ int				add_to_stack(t_stack **st, int nb);
 
 void			destroy_stack(t_stack **st);
 
-int				is_sort(t_stack *st);
+t_stack			*dupe_stack(t_stack *src);
 
 int				fill_stack(int ac, char **av, t_stack **a);
 
@@ -54,28 +54,24 @@ int				rev_rotate(t_stack **st);
 ** stack sorter
 */
 
-int				sswap(t_stack *a, t_stack *b);
-
-int				rrotate(t_stack **a, t_stack **b);
-
-int				rev_rrotate(t_stack **a, t_stack **b);
-
 int				sort_stack(t_stack **a, t_stack **b);
+
+int				is_sort(t_stack *st);
 
 /*
 ** sorting algorithms
 */
 
-int				bubble_sort(t_stack *orig);
+char			**bubble_sort(t_stack *orig);
 
-int				selection_sort(t_stack *orig);
+/*char			**selection_sort(t_stack *orig);
 
-int				insertion_sort(t_stack *orig);
+char			**insertion_sort(t_stack *orig);
 
-int				quick_sort(t_stack *orig);
+char			**quick_sort(t_stack *orig);
 
-int				gnome_sort(t_stack *orig);
+char			**gnome_sort(t_stack *orig);
 
-int				brute_sort(t_stack *orig);
+char			**brute_sort(t_stack *orig);*/
 
 #endif
