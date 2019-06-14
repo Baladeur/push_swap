@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-int		add_to_stack(t_stack **st, int nb)
+int		add_to_stack(t_stack **st, int nb, int boolean)
 {
 	t_stack	*pos;
 
@@ -25,13 +25,13 @@ int		add_to_stack(t_stack **st, int nb)
 		return (1);
 	}
 	pos = *st;
-	while (pos->next && pos->value != nb)
+	while (pos->next && (boolean || pos->value != nb))
 		pos = pos->next;
-	if (pos->value == nb || !(pos = (t_stack *)malloc(sizeof(t_stack))))
+	if ((!boolean && pos->value == nb)
+			|| !(pos->next = (t_stack *)malloc(sizeof(t_stack))))
 		return (0);
-	pos->next = *st;
-	pos->value = nb;
-	*st = pos;
+	pos->next->value = nb;
+	pos->next->next = NULL;
 	return (1);
 }
 
@@ -45,7 +45,7 @@ t_stack	*dupe_stack(t_stack *src)
 	pos = src;
 	while (pos)
 	{
-		if (!(add_to_stack(&new, pos->value)))
+		if (!(add_to_stack(&new, pos->value, 0)))
 		{
 			destroy_stack(&new);
 			return (NULL);
@@ -87,7 +87,7 @@ int		fill_stack(int ac, char **av, t_stack **a)
 		if (av[i][k])
 			return (0);
 		nb = ft_atoi_l(av[i]);
-		if (nb != (long int)((int)nb) || !add_to_stack(a, (int)nb))
+		if (nb != (long int)((int)nb) || !(add_to_stack(a, (int)nb, 0)))
 			return (0);
 		i++;
 	}

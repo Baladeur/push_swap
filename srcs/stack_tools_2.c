@@ -12,3 +12,34 @@
 
 #include "../includes/push_swap.h"
 
+t_stack	*get_at(t_stack *src, int i)
+{
+	t_stack	*pos;
+	int		k;
+
+	if (!src || !*src)
+		return (NULL);
+	k = 0;
+	pos = src;
+	while (pos && *pos && k < i)
+	{
+		pos = pos->next;
+		i++;
+	}
+	if (k < i)
+		return (NULL);
+	else
+		return (pos);
+}
+
+int		stack_size(t_stack *st)
+{
+	int i;
+
+	if (!st || !*st)
+		return (0);
+	i = 0;
+	while (st && i++)
+		st = st->next;
+	return (i);
+}

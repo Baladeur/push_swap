@@ -12,18 +12,50 @@
 
 #include "../includes/push_swap.h"
 
-char	**bubble_sort(t_stack *orig)
+static void	bubble_loop(t_stack **a, int size, int i, t_stack **moveset)
+{
+	int k;
+
+	k = 0;
+	while (k < i)
+	{
+		add_to_stack(moveset, 8, 1);
+		rev_rotate(a);
+		k++;
+	}
+	while (k < size)
+	{
+		if (get_at(*a, size - 1)->value > get_at(*a, size)->value)
+		{
+			add_to_stack(moveset, 0, 1);
+			swap(*a);
+		}
+		add_to_stack(moveset, 8, 1);
+		rev_rotate(a);
+		k++;
+	}
+}
+
+t_stack		*bubble_sort(t_stack *orig)
 {
 	t_stack	*a;
-	t_stack	*pos;
+	t_stack *moveset;
 	int		size;
+	int		i;
 
 	size = 0;
-	if (!(orig) || !(*orig))
+	if (!orig || !*orig)
 		return (NULL);
-	pos = orig;
 	a = dupe_stack(orig);
-	while (pos && size++)
-		pos = pos->next;
-	
+	size = stack_size(orig);
+	i = 0;
+	while (i < size)
+		bubble_loop(&a, size, i, &moveset);
+	if (!(is_sort(a)))
+	{
+		destroy_stack(&a);
+		return (NULL);
+	}
+	destroy_stack(&a);
+	return (moveset);
 }

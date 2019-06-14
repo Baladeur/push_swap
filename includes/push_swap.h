@@ -28,7 +28,7 @@ typedef struct	s_stack
 ** stack tools
 */
 
-int				add_to_stack(t_stack **st, int nb);
+int				add_to_stack(t_stack **st, int nb, int boolean);
 
 void			destroy_stack(t_stack **st);
 
@@ -37,6 +37,10 @@ t_stack			*dupe_stack(t_stack *src);
 int				fill_stack(int ac, char **av, t_stack **a);
 
 void			print_stack(t_stack *st);
+
+t_stack			*get_at(t_stack *src, int i);
+
+int				stack_size(t_stack *st);
 
 /*
 ** stack moveset
@@ -62,16 +66,16 @@ int				is_sort(t_stack *st);
 ** sorting algorithms
 */
 
-char			**bubble_sort(t_stack *orig);
+t_stack			*bubble_sort(t_stack *orig);
 
-/*char			**selection_sort(t_stack *orig);
+/*t_stack			*selection_sort(t_stack *orig);
 
-char			**insertion_sort(t_stack *orig);
+t_stack			*insertion_sort(t_stack *orig);
 
-char			**quick_sort(t_stack *orig);
+t_stack			*quick_sort(t_stack *orig);
 
-char			**gnome_sort(t_stack *orig);
+t_stack			*gnome_sort(t_stack *orig);
 
-char			**brute_sort(t_stack *orig);*/
+t_stack			*brute_sort(t_stack *orig);*/
 
 #endif
