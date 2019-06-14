@@ -56,3 +56,17 @@ int			sort_stack(t_stack **a, t_stack **b)
 	free(str);
 	return (1);
 }
+
+int			is_sort(t_stack *st)
+{
+	t_stack *pos;
+
+	pos = st;
+	while (pos && pos->next)
+	{
+		if (pos->value < pos->next->value)
+			return (0);
+		pos = pos->next;
+	}
+	return (1);
+}

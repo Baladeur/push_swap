@@ -28,7 +28,7 @@ typedef struct	s_stack
 ** stack tools
 */
 
-int				add_stack(t_stack **st, int nb);
+int				add_to_stack(t_stack **st, int nb);
 
 void			destroy_stack(t_stack **st);
 
@@ -61,5 +61,21 @@ int				rrotate(t_stack **a, t_stack **b);
 int				rev_rrotate(t_stack **a, t_stack **b);
 
 int				sort_stack(t_stack **a, t_stack **b);
+
+/*
+** sorting algorithms
+*/
+
+int				bubble_sort(t_stack *orig);
+
+int				selection_sort(t_stack *orig);
+
+int				insertion_sort(t_stack *orig);
+
+int				quick_sort(t_stack *orig);
+
+int				gnome_sort(t_stack *orig);
+
+int				brute_sort(t_stack *orig);
 
 #endif

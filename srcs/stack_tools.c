@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-int		add_stack(t_stack **st, int nb)
+int		add_to_stack(t_stack **st, int nb)
 {
 	t_stack	*pos;
 
@@ -50,20 +50,6 @@ void	destroy_stack(t_stack **st)
 	*st = NULL;
 }
 
-int		is_sort(t_stack *st)
-{
-	t_stack *pos;
-
-	pos = st;
-	while (pos && pos->next)
-	{
-		if (pos->value < pos->next->value)
-			return (0);
-		pos = pos->next;
-	}
-	return (1);
-}
-
 int		fill_stack(int ac, char **av, t_stack **a)
 {
 	long int	nb;
@@ -81,7 +67,7 @@ int		fill_stack(int ac, char **av, t_stack **a)
 		if (av[i][k])
 			return (0);
 		nb = ft_atoi_l(av[i]);
-		if (nb != (long int)((int)nb) || !add_stack(a, (int)nb))
+		if (nb != (long int)((int)nb) || !add_to_stack(a, (int)nb))
 			return (0);
 		i++;
 	}
