@@ -26,33 +26,23 @@ int		add_to_stack(t_stack **st, int nb, int boolean)
 	}
 	pos = *st;
 	while (pos->next && (boolean || pos->value != nb))
+	{
 		pos = pos->next;
+	}
 	if ((!boolean && pos->value == nb)
-			|| !(pos->next = (t_stack *)malloc(sizeof(t_stack))))
+			|| !(pos = (t_stack *)malloc(sizeof(t_stack))))
 		return (0);
-	pos->next->value = nb;
-	pos->next->next = NULL;
+	pos->next = *st;
+	pos->value = nb;
+	*st = pos;
 	return (1);
 }
 
-t_stack	*dupe_stack(t_stack *src)
+void	dupe_stack(t_stack *src, t_stack **dest)
 {
-	t_stack *new;
-	t_stack *pos;
-
-	if (!(src) || !(*src))
-		return (NULL);
-	pos = src;
-	while (pos)
-	{
-		if (!(add_to_stack(&new, pos->value, 0)))
-		{
-			destroy_stack(&new);
-			return (NULL);
-		}
-		pos = pos->next;
-	}
-	return (new);
+	if (src->next)
+		dupe_stack(src->next, dest);
+	add_to_stack(dest, src->value, 0);
 }
 
 void	destroy_stack(t_stack **st)

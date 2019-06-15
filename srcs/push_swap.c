@@ -17,42 +17,38 @@ static void	destroy_moveset(t_stack ***moveset)
 	int i;
 
 	i = 0;
-	while (i < 6)
+	while (i < 1)
 	{
 		destroy_stack(*(moveset + i));
 		i++;
 	}
 	free(*moveset);
-	*moveset = null;
+	*moveset = NULL;
 }
 
-static void	printf_moveset(t_stack *moveset)
+static void	print_moveset(t_stack *moveset)
 {
-	t_stack	*pos;
 	int		t;
 
-	pos = moveset;
-	while (pos)
-	{
-		t = pos->value;
-		if (t >= 0 && t <= 2)
-			ft_printf("s");
-		if (t == 3 || t == 4)
-			ft_printf("p");
-		if (t >= 5 && t <= 7)
-			ft_printf("r");
-		if (t >= 8 && t <= 10)
-			ft_printf("rr");
-		if (t == 0 || t == 3 || t == 5 || t == 8)
-			ft_printf("a\n");
-		if (t == 1 || t == 4 || t == 6 || t == 9)
-			ft_printf("b\n");
-		if (t == 2)
-			ft_printf("s\n");
-		if (t == 7 || t == 10)
-			ft_printf("r\n");
-		pos = pos->next;
-	}
+	if (moveset->next)
+		print_moveset(moveset->next);
+	t = moveset->value;
+	if (t >= 0 && t <= 2)
+		ft_printf("s");
+	if (t == 3 || t == 4)
+		ft_printf("p");
+	if (t >= 5 && t <= 7)
+		ft_printf("r");
+	if (t >= 8 && t <= 10)
+		ft_printf("rr");
+	if (t == 0 || t == 3 || t == 5 || t == 8)
+		ft_printf("a\n");
+	if (t == 1 || t == 4 || t == 6 || t == 9)
+		ft_printf("b\n");
+	if (t == 2)
+		ft_printf("s\n");
+	if (t == 7 || t == 10)
+		ft_printf("r\n");
 }
 
 static int	shortest_result(t_stack ***results)
@@ -65,16 +61,18 @@ static int	shortest_result(t_stack ***results)
 	shortest = stack_size((*results)[0]);
 	id = 0;
 	i = 1;
-	while (i < 6)
+	while (i < 1)
 	{
-		if (tmp = stack_size((*results)[i]) < shortest)
+		if ((tmp = stack_size((*results)[i])) < shortest
+				&& (!(*results[i]) || (*results[i])->value >= 0)) 
 		{
 			shortest = tmp;
 			id = i;
 		}
 		i++;
 	}
-	printf_moveset((*results)[i]);
+	if (shortest)
+		print_moveset((*results)[id]);
 	destroy_moveset(results);
 	return (1);
 }
@@ -85,17 +83,19 @@ int			main(int ac, char **av)
 	t_stack *a;
 
 	a = NULL;
+	if (ac == 1 || ac == 2)
+		return (0);
 	if (!(fill_stack(ac, av, &a))
-		|| !(results = (t_stack **)malloc(sizeof(t_stack *) * 6)))
+		|| !(results = (t_stack **)malloc(sizeof(t_stack *) * 1)))
 	{
 		destroy_stack(&a);
 		return (write(2, "Error\n", 6));
 	}
-	result[0] = bubble_sort(a);
-	/*result[1] = gnome_sort(a);
-	result[2] = selection_sort(a);
-	result[3] = insertion_sort(a);
-	result[4] = quick_sort(a);
-	result[5] = brute_sort(a);*/
+	results[0] = bubble_sort(a);
+	/*results[1] = gnome_sort(a);
+	results[2] = selection_sort(a);
+	results[3] = insertion_sort(a);
+	results[4] = quick_sort(a);
+	results[5] = brute_sort(a);*/
 	return (shortest_result(&results));
 }

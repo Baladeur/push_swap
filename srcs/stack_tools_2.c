@@ -17,14 +17,14 @@ t_stack	*get_at(t_stack *src, int i)
 	t_stack	*pos;
 	int		k;
 
-	if (!src || !*src)
+	if (!src)
 		return (NULL);
 	k = 0;
 	pos = src;
-	while (pos && *pos && k < i)
+	while (pos && k < i)
 	{
 		pos = pos->next;
-		i++;
+		k++;
 	}
 	if (k < i)
 		return (NULL);
@@ -36,10 +36,10 @@ int		stack_size(t_stack *st)
 {
 	int i;
 
-	if (!st || !*st)
+	if (!st)
 		return (0);
 	i = 0;
-	while (st && i++)
+	while (st && ++i)
 		st = st->next;
 	return (i);
 }

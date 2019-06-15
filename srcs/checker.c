@@ -19,6 +19,8 @@ int	main(int ac, char **av)
 
 	a = NULL;
 	b = NULL;
+	if (ac == 1)
+		return (0);
 	if (!(fill_stack(ac, av, &a)))
 	{
 		destroy_stack(&a);

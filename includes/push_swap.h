@@ -32,7 +32,7 @@ int				add_to_stack(t_stack **st, int nb, int boolean);
 
 void			destroy_stack(t_stack **st);
 
-t_stack			*dupe_stack(t_stack *src);
+void			dupe_stack(t_stack *src, t_stack **dest);
 
 int				fill_stack(int ac, char **av, t_stack **a);
 
