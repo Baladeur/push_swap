@@ -17,13 +17,7 @@ static void	bubble_loop(t_stack **a, int size, int i, t_stack **moveset)
 	int k;
 
 	k = 0;
-	while (k < i)
-	{
-		add_to_stack(moveset, 8, 1);
-		rev_rotate(a);
-		k++;
-	}
-	while (k < size && !(is_sort(*a)))
+	while (k < size - i && !(is_sort(*a)))
 	{
 		if ((get_at(*a, size - 2))->value < (get_at(*a, size - 1))->value)
 		{
@@ -31,9 +25,20 @@ static void	bubble_loop(t_stack **a, int size, int i, t_stack **moveset)
 			swap(*a);
 		}
 		if (!(is_sort(*a)))
-			add_to_stack(moveset, 8, 1);
-		rev_rotate(a);
+		{
+			add_to_stack(moveset, 5, 1);
+			rotate(a);
+		}
 		k++;
+	}
+	while (k < size && k > 0 && !(is_sort(*a)))
+	{
+		if (k > (size / 2))
+			rotate(a);
+		else
+			rev_rotate(a);
+		add_to_stack(moveset, k > (size / 2) ? 5 : 8, 1);
+		k += k > (size / 2) ? 1 : -1;
 	}
 }
 
@@ -61,6 +66,5 @@ t_stack		*bubble_sort(t_stack *orig)
 		i++;
 	}
 	destroy_stack(&a);
-	print_stack(moveset);
 	return (moveset);
 }

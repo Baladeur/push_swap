@@ -97,5 +97,7 @@ int			main(int ac, char **av)
 	results[3] = insertion_sort(a);
 	results[4] = quick_sort(a);
 	results[5] = brute_sort(a);*/
+	moveset_cleaner(results, a);
+	destroy_stack(&a);
 	return (shortest_result(&results));
 }
