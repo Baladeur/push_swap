@@ -43,8 +43,3 @@ int		stack_size(t_stack *st)
 		st = st->next;
 	return (i);
 }
-
-void	moveset_cleaner(t_stack **results, t_stack *a)
-{
-
-}

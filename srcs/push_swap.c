@@ -64,7 +64,7 @@ static int	shortest_result(t_stack ***results)
 	while (i < 1)
 	{
 		if ((tmp = stack_size((*results)[i])) < shortest
-				&& (!(*results[i]) || (*results[i])->value >= 0)) 
+				&& (!(*results[i]) || (*results[i])->value >= 0))
 		{
 			shortest = tmp;
 			id = i;

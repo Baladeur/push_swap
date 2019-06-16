@@ -42,6 +42,8 @@ t_stack			*get_at(t_stack *src, int i);
 
 int				stack_size(t_stack *st);
 
+void			moveset_cleaner(t_stack **results, t_stack *orig);
+
 /*
 ** stack moveset
 */

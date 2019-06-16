@@ -16,8 +16,8 @@ static void	bubble_loop(t_stack **a, int size, int i, t_stack **moveset)
 {
 	int k;
 
-	k = 0;
-	while (k < size - i && !(is_sort(*a)))
+	k = -1;
+	while (++k < size - i - 1 && !(is_sort(*a)))
 	{
 		if ((get_at(*a, size - 2))->value < (get_at(*a, size - 1))->value)
 		{
@@ -29,7 +29,6 @@ static void	bubble_loop(t_stack **a, int size, int i, t_stack **moveset)
 			add_to_stack(moveset, 5, 1);
 			rotate(a);
 		}
-		k++;
 	}
 	while (k < size && k > 0 && !(is_sort(*a)))
 	{
@@ -60,7 +59,7 @@ t_stack		*bubble_sort(t_stack *orig)
 	dupe_stack(orig, &a);
 	size = stack_size(orig);
 	i = 0;
-	while (i < size && !(is_sort(a)))
+	while (i < size - 1 && !(is_sort(a)))
 	{
 		bubble_loop(&a, size, i, &moveset);
 		i++;
