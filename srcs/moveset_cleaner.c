@@ -106,7 +106,7 @@ void			moveset_cleaner(t_stack **results, t_stack *orig)
 
 	b = NULL;
 	i = 0;
-	while (i < 2)
+	while (i < 3)
 	{
 		a = NULL;
 		b = NULL;

@@ -72,6 +72,8 @@ t_stack			*bubble_sort(t_stack *orig);
 
 t_stack			*gnome_sort(t_stack *orig);
 
+t_stack			*selection_sort(t_stack *orig);
+
 /*t_stack			*selection_sort(t_stack *orig);
 
 t_stack			*insertion_sort(t_stack *orig);
