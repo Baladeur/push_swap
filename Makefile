@@ -17,20 +17,23 @@ NAME2		=		checker
 LIB			=		./libft/libft.a
 
 SRCS		=		./srcs/stack_moveset.c \
-					./srcs/stack_tools.c \
+					./srcs/stack_tools_1.c \
+					./srcs/stack_tools_2.c \
 					./srcs/stack_sorter.c
 
 SRC1		=		./srcs/push_swap.c \
-					./srcs/brute.c
+					./srcs/selection_sort.c \
+					./srcs/gnome_sort.c \
+					./srcs/bubble_sort.c \
+					./srcs/moveset_cleaner.c
 
 SRC2		=		./srcs/checker.c
 
 OBJS		=		$(patsubst ./srcs/%.c, %.o, $(SRCS))
 
-OBJ1		=		push_swap.o \
-					brute.o
+OBJ1		=		$(patsubst ./srcs/%.c, %.o, $(SRC1))
 
-OBJ2		=		checker.o
+OBJ2		=		$(patsubst ./srcs/%.c, %.o, $(SRC2))
 
 FLAGS		=		-Wall -Werror -Wextra
 

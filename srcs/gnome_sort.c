@@ -46,7 +46,6 @@ t_stack		*gnome_sort(t_stack *orig)
 	t_stack	*a;
 	t_stack *moveset;
 	int		size;
-	int		i;
 
 	a = NULL;
 	moveset = NULL;
