@@ -21,9 +21,9 @@ static int	sort_loop(t_stack **a, t_stack **b, char *str, int len)
 	else if (len == 2 && str[0] == 's' && str[1] == 's')
 		return (swap(*a) && swap(*b));
 	else if (len == 2 && str[0] == 'p' && str[1] == 'a')
-		return (push(a, b));
-	else if (len == 2 && str[0] == 'p' && str[1] == 'b')
 		return (push(b, a));
+	else if (len == 2 && str[0] == 'p' && str[1] == 'b')
+		return (push(a, b));
 	else if (len == 2 && str[0] == 'r' && str[1] == 'a')
 		return (rotate(a));
 	else if (len == 2 && str[0] == 'r' && str[1] == 'b')

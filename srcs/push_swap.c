@@ -58,30 +58,22 @@ static int	shortest_result(t_stack ***results)
 	int	shortest;
 	int tmp;
 
-	ft_printf("Dummy 1\n");
 	shortest = stack_size((*results)[0]);
 	id = 0;
 	i = 1;
-	ft_printf("Dummy 2\n");
 	while (i < 3)
 	{
-		ft_printf("Dummy 2.1\n");
 		if ((tmp = stack_size((*results)[i])) < shortest
-				&& (!(*results[i]) || (*results[i])->value >= 0))
+				&& (!(*results)[i] || (*results)[i]->value >= 0))
 		{
-			ft_printf("Dummy 2.2\n");
 			shortest = tmp;
 			id = i;
 		}
-		ft_printf("Dummy 2.3\n");
 		i++;
 	}
-	ft_printf("Dummy 3\n");
 	if (shortest)
 		print_moveset((*results)[id]);
-	ft_printf("Dummy 4\n");
 	destroy_moveset(results);
-	ft_printf("Dummy 5\n");
 	return (1);
 }
 
@@ -105,9 +97,7 @@ int			main(int ac, char **av)
 	/*results[3] = insertion_sort(a);
 	results[4] = quick_sort(a);
 	results[5] = brute_sort(a);*/
-	ft_printf("[0] : %d | [1] : %d | [2] : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]));
 	moveset_cleaner(results, a);
-	ft_printf("[0] : %d | [1] : %d | [2] : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]));
 	destroy_stack(&a);
 	return (shortest_result(&results));
 }
