@@ -44,14 +44,17 @@ int			sort_stack(t_stack **a, t_stack **b)
 {
 	char	*str;
 
+	print_stack(*a);
 	while (get_next_line(0, &str) && ft_strlen(str))
 	{
+		ft_printf("%s\n",str);
 		if (!(sort_loop(a, b, str, (int)ft_strlen(str))))
 		{
 			free(str);
 			return (0);
 		}
 		free(str);
+		print_stack(*a);
 	}
 	free(str);
 	return (1);

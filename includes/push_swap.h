@@ -70,13 +70,13 @@ int				is_sort(t_stack *st);
 
 t_stack			*bubble_sort(t_stack *orig);
 
+t_stack			*gnome_sort(t_stack *orig);
+
 /*t_stack			*selection_sort(t_stack *orig);
 
 t_stack			*insertion_sort(t_stack *orig);
 
 t_stack			*quick_sort(t_stack *orig);
-
-t_stack			*gnome_sort(t_stack *orig);
 
 t_stack			*brute_sort(t_stack *orig);*/
 
