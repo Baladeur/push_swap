@@ -24,7 +24,7 @@ static void	biggest_to_b(t_stack **moveset, t_stack **a, t_stack **b, int size)
 	while (i <= size)
 	{
 		if (get_at(*a, size - i)->value < max && (id = i))
-			max = get_at(*a, size -i)->value;
+			max = get_at(*a, size - i)->value;
 		i++;
 	}
 	while (id > 1 && id <= size)

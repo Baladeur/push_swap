@@ -54,7 +54,7 @@ static void		check_replace(t_stack **moveset, t_stack **st)
 {
 	t_stack	*pos;
 	int		size;
-	int 	id;
+	int		id;
 	int		k;
 	int		i;
 
@@ -64,7 +64,7 @@ static void		check_replace(t_stack **moveset, t_stack **st)
 	while (pos && pos->value == id)
 	{
 		pos = pos->next;
-		i++;		
+		i++;
 	}
 	size = stack_size(*st);
 	if (i <= size / 2)
@@ -91,10 +91,8 @@ static void		clean_sort(t_stack **moveset, t_stack **a, t_stack **b)
 			check_replace(&pos, a);
 		if (move == 6 || move == 9)
 			check_replace(&pos, b);
-		
 		pos = pos->next;
 	}
-	
 }
 
 void			moveset_cleaner(t_stack **results, t_stack *orig)

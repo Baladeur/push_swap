@@ -47,7 +47,7 @@ int			sort_stack(t_stack **a, t_stack **b)
 	print_stack(*a);
 	while (get_next_line(0, &str) && ft_strlen(str))
 	{
-		ft_printf("%s\n",str);
+		ft_printf("%s\n", str);
 		if (!(sort_loop(a, b, str, (int)ft_strlen(str))))
 		{
 			free(str);
