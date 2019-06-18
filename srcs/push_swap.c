@@ -61,7 +61,7 @@ static int	shortest_result(t_stack ***results)
 	shortest = stack_size((*results)[0]);
 	id = 0;
 	i = 1;
-	while (i < 3)
+	while (i < 4)
 	{
 		if ((tmp = stack_size((*results)[i])) < shortest
 				&& (!(*results)[i] || (*results)[i]->value >= 0))
@@ -86,7 +86,7 @@ int			main(int ac, char **av)
 	if (ac == 1 || ac == 2)
 		return (0);
 	if (!(fill_stack(ac, av, &a))
-		|| !(results = (t_stack **)malloc(sizeof(t_stack *) * 3)))
+		|| !(results = (t_stack **)malloc(sizeof(t_stack *) * 4)))
 	{
 		destroy_stack(&a);
 		return (write(2, "Error\n", 6));
@@ -94,9 +94,10 @@ int			main(int ac, char **av)
 	results[0] = bubble_sort(a);
 	results[1] = gnome_sort(a);
 	results[2] = selection_sort(a);
-	/*results[3] = insertion_sort(a);
-	results[4] = quick_sort(a);
+	results[3] = insertion_sort(a);
+	/*results[4] = quick_sort(a);
 	results[5] = brute_sort(a);*/
+	ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]));
 	moveset_cleaner(results, a);
 	destroy_stack(&a);
 	return (shortest_result(&results));
