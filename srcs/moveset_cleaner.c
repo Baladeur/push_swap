@@ -12,111 +12,60 @@
 
 #include "../includes/push_swap.h"
 
-static t_stack	*revert_moveset(t_stack *moveset)
+static void	fill_replace(t_stack **moveset, int *co, int mv)
 {
-	t_stack *new;
 	t_stack *pos;
-
-	new = NULL;
-	pos = moveset;
-	while (pos)
-	{
-		add_to_stack(&new, pos->value, 1);
-		pos = pos->next;
-	}
-	return (new);
-}
-
-static void		replace_n_free(t_stack **moveset, int id, int i, int k)
-{
-	t_stack	*pos;
 	t_stack	*tmp;
-	int		c;
-
-	c = -1;
-	pos = *moveset;
-	while (++c < k)
-	{
-		pos->value = id;
-		tmp = pos;
-		pos = pos->next;
-	}
-	while (c < i)
-	{
-		tmp->next = pos->next;
-		free(pos);
-		pos = tmp->next;
-		c++;
-	}
-}
-
-static void		check_replace(t_stack **moveset, t_stack **st)
-{
-	t_stack	*pos;
 	int		size;
-	int		id;
-	int		k;
 	int		i;
 
-	pos = *moveset;
-	id = pos->value;
-	i = 0;
-	while (pos && pos->value == id)
+	size = stack_size(*moveset);
+	new = NULL;
+	i = -1;
+	while (++i < co[2])
+		set_at(*moveset, size - co[0] - i - 1, mv);
+	pos = get_at(*moveset, size - co[0] - co[2] - 1);
+	tmp = get_at(*moveset, size - co[0] - co[2] - 1)->next;
+	pos->next = get_at(*moveset, size - co[0] - co[1]);
+	while (i < co[1])
 	{
-		pos = pos->next;
+		pos = tmp->next;
+		free(tmp);
+		tmp = pos;
 		i++;
 	}
-	size = stack_size(*st);
-	if (i <= size / 2)
-		return ;
-	k = i % size;
-	if (k > size / 2)
-	{
-		id += (id == 5 || id == 6) ? 3 : -3;
-		k = size - k;
-	}
-	replace_n_free(moveset, id, i, k);
 }
 
-static void		clean_sort(t_stack **moveset, t_stack **a, t_stack **b)
+static void	clean_one(t_stack **moveset, t_stack **a, t_stack **b)
 {
-	t_stack	*pos;
-	int		move;
+	int size;
+	int i;
 
-	pos = *moveset;
-	while (pos)
+	size = stack_size(*moveset);
+	i = 0;
+	while (i < size)
 	{
-		move = pos->value;
-		if (move == 5 || move == 8)
-			check_replace(&pos, a);
-		else if (move == 6 || move == 9)
-			check_replace(&pos, b);
-		pos = pos->next;
+
+		size = stack_size(*moveset);
+		if (/*CO[2] != 0*/)
+			i++;
 	}
 }
 
-void			moveset_cleaner(t_stack **results, t_stack *orig)
+void		moveset_cleaner(t_stack **results, t_stack *orig)
 {
-	t_stack	*a;
-	t_stack	*b;
-	t_stack	*moveset;
+	t_stack *a;
+	t_stack *b;
 	int		i;
 
-	b = NULL;
 	i = 0;
 	while (i < 4)
 	{
-		ft_printf("[%d]\n", i);
-		a = NULL;
-		b = NULL;
-		moveset = NULL;
 		dupe_stack(orig, &a);
-		moveset = revert_moveset(results[i]);
-		clean_sort(&moveset, &a, &b);
-		destroy_stack(&b);
+		b = NULL;
+		clean_one(results[i], &a, &b);
 		destroy_stack(&a);
-		destroy_stack(results + i);
-		results[i] = revert_moveset(moveset);
+		destroy_stack(&b);
 		i++;
 	}
 }

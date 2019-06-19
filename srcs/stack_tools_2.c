@@ -32,6 +32,23 @@ t_stack	*get_at(t_stack *src, int i)
 		return (pos);
 }
 
+void	set_at(t_stack *src, int i, int v)
+{
+	t_stack	*pos;
+	int		k;
+
+	if (!src)
+		return (NULL);
+	k = 0;
+	pos = src;
+	while (pos && k < i)
+	{
+		pos = pos->next;
+		k++;
+	}
+	if (pos)
+		pos->value = v;
+
 int		stack_size(t_stack *st)
 {
 	int i;

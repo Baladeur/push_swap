@@ -40,6 +40,8 @@ void			print_stack(t_stack *st);
 
 t_stack			*get_at(t_stack *src, int i);
 
+void			set_at(t_stack *src, int i, int v);
+
 int				stack_size(t_stack *st);
 
 void			moveset_cleaner(t_stack **results, t_stack *orig);
