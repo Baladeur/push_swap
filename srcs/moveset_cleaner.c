@@ -89,7 +89,7 @@ static void		clean_sort(t_stack **moveset, t_stack **a, t_stack **b)
 		move = pos->value;
 		if (move == 5 || move == 8)
 			check_replace(&pos, a);
-		if (move == 6 || move == 9)
+		else if (move == 6 || move == 9)
 			check_replace(&pos, b);
 		pos = pos->next;
 	}
@@ -106,6 +106,7 @@ void			moveset_cleaner(t_stack **results, t_stack *orig)
 	i = 0;
 	while (i < 4)
 	{
+		ft_printf("[%d]\n", i);
 		a = NULL;
 		b = NULL;
 		moveset = NULL;

@@ -12,18 +12,17 @@
 
 #include "../includes/push_swap.h"
 
-static void	destroy_moveset(t_stack ***moveset)
+static void	destroy_moveset(t_stack **moveset)
 {
 	int i;
 
 	i = 0;
-	while (i < 1)
+	while (i < 4)
 	{
-		destroy_stack(*(moveset + i));
+		destroy_stack(moveset + i);
 		i++;
 	}
-	free(*moveset);
-	*moveset = NULL;
+	free(moveset);
 }
 
 static void	print_moveset(t_stack *moveset)
@@ -73,7 +72,7 @@ static int	shortest_result(t_stack ***results)
 	}
 	if (shortest)
 		print_moveset((*results)[id]);
-	destroy_moveset(results);
+	destroy_moveset(*results);
 	return (1);
 }
 
@@ -97,8 +96,8 @@ int			main(int ac, char **av)
 	results[3] = insertion_sort(a);
 	/*results[4] = quick_sort(a);
 	results[5] = brute_sort(a);*/
-	ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]));
-	moveset_cleaner(results, a);
+	//ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]));
+	//moveset_cleaner(results, a);
 	destroy_stack(&a);
 	return (shortest_result(&results));
 }

@@ -26,9 +26,7 @@ int		add_to_stack(t_stack **st, int nb, int boolean)
 	}
 	pos = *st;
 	while (pos->next && (boolean || pos->value != nb))
-	{
 		pos = pos->next;
-	}
 	if ((!boolean && pos->value == nb)
 			|| !(pos = (t_stack *)malloc(sizeof(t_stack))))
 		return (0);
