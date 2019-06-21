@@ -24,6 +24,13 @@ typedef struct	s_stack
 	struct s_stack	*next;
 }				t_stack;
 
+typedef struct	s_part
+{
+	int 	id;
+	int		op;
+	int		ed;
+}				t_part;
+
 /*
 ** stack tools
 */
@@ -46,6 +53,16 @@ int				stack_size(t_stack *st);
 
 void			moveset_cleaner(t_stack **results, t_stack *orig);
 
+void			print_stacks(t_stack *a, t_stack *b);
+
+/*
+** part tools
+*/
+
+int				init_part(t_part **part, int size, int id);
+
+int				is_part_sort(t_part *part, t_stack *a, t_stack *b);
+
 /*
 ** stack moveset
 */
@@ -65,6 +82,8 @@ int				rev_rotate(t_stack **st);
 int				sort_stack(t_stack **a, t_stack **b);
 
 int				is_sort(t_stack *st);
+
+int				is_rev_sort(t_stack *st);
 
 /*
 ** sorting algorithms

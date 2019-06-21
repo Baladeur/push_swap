@@ -75,7 +75,8 @@ static void	insertion_loop(t_stack **moveset, t_stack **a, int i)
 	}
 	if (pos < 0)
 		return ;
-	move_at(moveset, a, get_at(*a, size - i)->value, get_at(*a, size - i + pos)->value);
+	move_at(moveset, a, get_at(*a, size - i)->value,
+			get_at(*a, size - i + pos)->value);
 }
 
 t_stack		*insertion_sort(t_stack *orig)

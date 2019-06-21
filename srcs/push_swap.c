@@ -94,7 +94,7 @@ int			main(int ac, char **av)
 	results[1] = gnome_sort(a);
 	results[2] = selection_sort(a);
 	results[3] = insertion_sort(a);
-	/*results[4] = quick_sort(a);
+	/*results[4] = quicksort(a);
 	results[5] = brute_sort(a);*/
 	//ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]));
 	//moveset_cleaner(results, a);

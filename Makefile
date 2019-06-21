@@ -25,8 +25,7 @@ SRC1		=		./srcs/push_swap.c \
 					./srcs/selection_sort.c \
 					./srcs/gnome_sort.c \
 					./srcs/bubble_sort.c \
-					./srcs/insertion_sort.c \
-					./srcs/moveset_cleaner.c
+					./srcs/insertion_sort.c
 
 SRC2		=		./srcs/checker.c
 

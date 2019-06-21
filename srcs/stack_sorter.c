@@ -47,14 +47,13 @@ int			sort_stack(t_stack **a, t_stack **b)
 	print_stack(*a);
 	while (get_next_line(0, &str) && ft_strlen(str))
 	{
-		ft_printf("%s\n", str);
 		if (!(sort_loop(a, b, str, (int)ft_strlen(str))))
 		{
 			free(str);
 			return (0);
 		}
 		free(str);
-		print_stack(*a);
+		print_stacks(*a, *b);
 	}
 	free(str);
 	return (1);
@@ -68,6 +67,20 @@ int			is_sort(t_stack *st)
 	while (pos && pos->next)
 	{
 		if (pos->value < pos->next->value)
+			return (0);
+		pos = pos->next;
+	}
+	return (1);
+}
+
+int			is_rev_sort(t_stack *st)
+{
+	t_stack *pos;
+
+	pos = st;
+	while (pos && pos->next)
+	{
+		if (pos->value > pos->next->value)
 			return (0);
 		pos = pos->next;
 	}
