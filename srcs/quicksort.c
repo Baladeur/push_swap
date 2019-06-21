@@ -12,13 +12,48 @@
 
 #include "../includes/push_swap.h"
 
-static int	split_part(t_part *part, t_stack **mv, t_stack **a, t_stack **b)
+static t_part	init_split(t_part *part, t_stack *a, t_stack *b)
 {
-	
+	t_part	**partitions;
 
+	if (!(partitions = (t_part **)malloc(sizeof(t_part *) * 2)))
+		return (NULL);
+	if (!(partitions[0] = (t_part *)malloc(sizeof(t_part))))
+	{
+		free(partitions);
+		return (NULL);
+	}
+	if (!(partitions[1] = (t_part *)malloc(sizeof(t_part))))
+	{
+		free(partitions[1]);
+		free(partitions);
+		return (NULL);
+	}
+	partitions[0]->id = part->id;
+	partitions[1]->id = part->id == 'A' ? 'B' : 'A';
+	partitions[0]->op = part->op;
+	partitions[1]->op =	stack_size(id == 'A' ? b : a);
+	partitions[0]->ed = part->op + (part->ed - part->op) / 2
+		+ part->id == 'A' ? (part->ed - part->op) % 2 : 0;
+	partitions[1]->ed =	partitions[1]->op + (part->ed - part-op) / 2
+		+ part->id == 'B' ? (part->ed - part->op) % 2 : 0;
+	return (partitions);
 }
 
-static void	rec_quicksort(t_part *part, t_stack **mv, t_stack **a, t_stack **b)
+static t_part	**split_part(t_part *part, t_stack **mv, t_stack **a, t_stack **b)
+{
+	t_part	**partitions;
+	int		id;
+	int		k;
+	int		i;
+	int		med;
+
+	
+	k = 0;
+	med = part_median(part, id ? a : b);
+}
+
+static void		rec_quicksort(t_part *part, t_stack **mv, t_stack **a, t_stack **b)
 {
 	t_part	**partitions;
 	int		k;

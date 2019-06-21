@@ -12,6 +12,31 @@
 
 #include "../includes/push_swap.h"
 
+int		median_part(t_part *part, t_stack *st)
+{
+	int i;
+	int c;
+	int u;
+	int m;
+
+	m = -1;
+	i = part->op;
+	while (i < part->ed)
+	{
+		u = part->op;
+		c = 0;
+		while (u < part->ed)
+		{
+			c += get_at(st, u)->value > get_at(st, i)->value ? 1 : 0;
+			c += get_at(st, u)->value < get_at(st, i)->value ? -1 : 0;
+			u++;
+		}
+		if (!c && i > m)
+			m - i;
+		i++;
+	}
+}
+
 int		init_part(t_part **part, int size, int id)
 {
 	if (!(*part = (t_part *)malloc(sizeof(t_part))))
