@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-int		median_part(t_part *part, t_stack *st)
+int		part_median(t_part *part, t_stack *st)
 {
 	int i;
 	int c;
@@ -27,14 +27,15 @@ int		median_part(t_part *part, t_stack *st)
 		c = 0;
 		while (u < part->ed)
 		{
-			c += get_at(st, u)->value > get_at(st, i)->value ? 1 : 0;
-			c += get_at(st, u)->value < get_at(st, i)->value ? -1 : 0;
+			c += get_at(st, part->op + u)->value > get_at(st, part->op + i)->value ? 1 : 0;
+			c += get_at(st, part->op + u)->value < get_at(st, part->op + i)->value ? -1 : 0;
 			u++;
 		}
 		if (!c && i > m)
-			m - i;
+			m = i;
 		i++;
 	}
+	return (get_at(st, part->op + m)->value);
 }
 
 int		init_part(t_part **part, int size, int id)
@@ -53,16 +54,25 @@ int		is_part_sort(t_part *part, t_stack *a, t_stack *b)
 	int		id;
 	int		i;
 
+	ft_printf("i\n");
 	id = part->id;
 	curr = id == 'A' ? a : b;
 	i = part->op;
-	while (i < part->ed)
+	ft_printf("%d | %d\n", i, part->ed);
+	while (i + 1 < part->ed)
 	{
 		if (id == 'A' && get_at(a, i + 1)->value > get_at(a, i)->value)
+		{
+			ft_printf("o\n");
 			return (0);
+		}
 		if (id == 'B' && get_at(b, i + 1)->value > get_at(b, i)->value)
+		{
+			ft_printf("o\n");
 			return (0);
+		}
 		i++;
 	}
+	ft_printf("o\n");
 	return (1);
 }

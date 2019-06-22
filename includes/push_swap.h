@@ -63,6 +63,8 @@ int				init_part(t_part **part, int size, int id);
 
 int				is_part_sort(t_part *part, t_stack *a, t_stack *b);
 
+int				part_median(t_part *part, t_stack *st);
+
 /*
 ** stack moveset
 */
@@ -97,12 +99,8 @@ t_stack			*selection_sort(t_stack *orig);
 
 t_stack			*insertion_sort(t_stack *orig);
 
-/*t_stack			*selection_sort(t_stack *orig);
+t_stack			*quicksort(t_stack *orig);
 
-t_stack			*insertion_sort(t_stack *orig);
-
-t_stack			*quick_sort(t_stack *orig);
-
-t_stack			*brute_sort(t_stack *orig);*/
+//t_stack			*brute_sort(t_stack *orig);*/
 
 #endif
