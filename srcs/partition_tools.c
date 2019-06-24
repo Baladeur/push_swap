@@ -14,28 +14,27 @@
 
 int		part_median(t_part *part, t_stack *st)
 {
-	int i;
-	int c;
-	int u;
-	int m;
+	int g[2];
+	int i[3];
 
-	m = -1;
-	i = part->op;
-	while (i < part->ed)
+	i[0] = part->op;
+	i[1] = part->op;
+	g[0] = (part->ed - part->op + 1) % 2;
+	while (i[0] < part->ed)
 	{
-		u = part->op;
-		c = 0;
-		while (u < part->ed)
+		i[2] = part->op;
+		g[1] = 0;
+		while (i[2] < part->ed)
 		{
-			c += get_at(st, part->op + u)->value > get_at(st, part->op + i)->value ? 1 : 0;
-			c += get_at(st, part->op + u)->value < get_at(st, part->op + i)->value ? -1 : 0;
-			u++;
+			g[1] += get_at(st, i[0])->value > get_at(st, i[2])->value ? 1 : 0;
+			g[1] -= get_at(st, i[0])->value < get_at(st, i[2])->value ? 1 : 0;
+			i[2]++;
 		}
-		if (!c && i > m)
-			m = i;
-		i++;
+		if (g[1] == g[0])
+			i[1] = i[0];
+		i[0]++;
 	}
-	return (get_at(st, part->op + m)->value);
+	return (get_at(st, i[1])->value);
 }
 
 int		init_part(t_part **part, int size, int id)
@@ -54,25 +53,26 @@ int		is_part_sort(t_part *part, t_stack *a, t_stack *b)
 	int		id;
 	int		i;
 
-	ft_printf("i\n");
 	id = part->id;
 	curr = id == 'A' ? a : b;
 	i = part->op;
-	ft_printf("%d | %d\n", i, part->ed);
 	while (i + 1 < part->ed)
 	{
 		if (id == 'A' && get_at(a, i + 1)->value > get_at(a, i)->value)
-		{
-			ft_printf("o\n");
 			return (0);
-		}
-		if (id == 'B' && get_at(b, i + 1)->value > get_at(b, i)->value)
-		{
-			ft_printf("o\n");
+		if (id == 'B' && get_at(b, i + 1)->value < get_at(b, i)->value)
 			return (0);
-		}
 		i++;
 	}
-	ft_printf("o\n");
 	return (1);
+}
+
+void	print_part(t_part *p, t_stack *st)
+{
+	int k;
+
+	k = p->op - 1;
+	while (++k < p->ed)
+		ft_printf("%d\t", get_at(st, k)->value);
+	ft_printf("\n");
 }

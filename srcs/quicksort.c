@@ -33,10 +33,10 @@ static t_part	**init_split(t_part *part, t_stack *a, t_stack *b)
 	partitions[1]->id = part->id == 'A' ? 'B' : 'A';
 	partitions[0]->op = part->op;
 	partitions[1]->op =	stack_size(part->id == 'A' ? b : a);
-	partitions[0]->ed = part->op + (part->ed - part->op) / 2
-		+ part->id == 'A' ? (part->ed - part->op) % 2 : 0;
-	partitions[1]->ed =	partitions[1]->op + (part->ed - part->op) / 2
-		+ part->id == 'B' ? (part->ed - part->op) % 2 : 0;
+	partitions[0]->ed = part->op + ((part->ed - part->op) / 2)
+		+ (part->id == 'A' ? (part->ed - part->op) % 2 : 0);
+	partitions[1]->ed =	partitions[1]->op + ((part->ed - part->op) / 2)
+		+ (part->id == 'B' ? (part->ed - part->op) % 2 : 0);
 	return (partitions);
 }
 
@@ -83,29 +83,20 @@ static void		rec_quicksort(t_part *part, t_stack **mv, t_stack **a, t_stack **b)
 	int		k;
 	int		id;
 
-	print_stacks(*a, *b);
-	ft_printf("\t1\n");
-	if (is_part_sort(part, *a, *b) || (is_sort(*a) && !(*b))
-		|| !(partitions = split_part(part, mv, a, b)))
-	{
-
-		ft_printf("\t->\n");
+	if (is_part_sort(part, *a, *b) || (is_sort(*a) && !(*b)))
 		return ;
-	}
-	ft_printf("\t2\n");
+	if (!(partitions = split_part(part, mv, a, b)))
+		return ;
 	rec_quicksort(partitions[0], mv, a, b);
-	ft_printf("\t3\n");
 	rec_quicksort(partitions[1], mv, a, b);
-	ft_printf("\t4\n");
-	k = 0;
+	k = partitions[1]->op;
 	id = part->id == 'A' ? 1 : 0;
-	while (k < part->ed)
+	while (k < partitions[1]->ed)
 	{
-		push(id ? a : b, id ? b : a);
+		push(id ? b : a, id ? a : b);
 		add_to_stack(mv, id ? 4 : 3, 1);
 		k++;
 	}
-	ft_printf("\t5\n");
 	free(partitions[0]);
 	free(partitions[1]);
 	free(partitions);

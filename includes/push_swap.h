@@ -65,6 +65,7 @@ int				is_part_sort(t_part *part, t_stack *a, t_stack *b);
 
 int				part_median(t_part *part, t_stack *st);
 
+void			print_part(t_part *p, t_stack *st);
 /*
 ** stack moveset
 */

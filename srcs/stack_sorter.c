@@ -53,8 +53,10 @@ int			sort_stack(t_stack **a, t_stack **b)
 			return (0);
 		}
 		free(str);
+		ft_printf("\n");
 		print_stacks(*a, *b);
 	}
+	ft_printf("\n");
 	free(str);
 	return (1);
 }
