@@ -27,7 +27,8 @@ SRC1		=		./srcs/push_swap.c \
 					./srcs/bubble_sort.c \
 					./srcs/quicksort.c \
 					./srcs/partition_tools.c \
-					./srcs/insertion_sort.c
+					./srcs/insertion_sort.c \
+					./srcs/brute.c
 
 SRC2		=		./srcs/checker.c
 

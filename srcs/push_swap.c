@@ -17,7 +17,7 @@ static void	destroy_moveset(t_stack **moveset)
 	int i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 6)
 	{
 		destroy_stack(moveset + i);
 		i++;
@@ -60,7 +60,7 @@ static int	shortest_result(t_stack ***results)
 	shortest = stack_size((*results)[0]);
 	id = 0;
 	i = 1;
-	while (i < 5)
+	while (i < 6)
 	{
 		if ((tmp = stack_size((*results)[i])) < shortest
 				&& (!(*results)[i] || (*results)[i]->value >= 0))
@@ -85,7 +85,7 @@ int			main(int ac, char **av)
 	if (ac == 1 || ac == 2)
 		return (0);
 	if (!(fill_stack(ac, av, &a))
-		|| !(results = (t_stack **)malloc(sizeof(t_stack *) * 5)))
+		|| !(results = (t_stack **)malloc(sizeof(t_stack *) * 6)))
 	{
 		destroy_stack(&a);
 		return (write(2, "Error\n", 6));
@@ -95,8 +95,9 @@ int			main(int ac, char **av)
 	results[2] = selection_sort(a);
 	results[3] = insertion_sort(a);
 	results[4] = quicksort(a);
-	/*results[5] = brute_sort(a);*/
-	//ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d | [4] : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]), stack_size(results[4]));
+	results[5] = brute_sort(a, 10);
+	ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d | [4] : %d | [5] : %d\n",
+	stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]), stack_size(results[4]), stack_size(results[5]));
 	//moveset_cleaner(results, a);
 	destroy_stack(&a);
 	return (shortest_result(&results));

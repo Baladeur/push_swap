@@ -102,6 +102,8 @@ t_stack			*insertion_sort(t_stack *orig);
 
 t_stack			*quicksort(t_stack *orig);
 
+t_stack			*brute_sort(t_stack *orig, int instructions_max);
+
 //t_stack			*brute_sort(t_stack *orig);*/
 
 #endif
