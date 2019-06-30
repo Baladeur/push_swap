@@ -45,15 +45,21 @@ int				fill_stack(int ac, char **av, t_stack **a);
 
 void			print_stack(t_stack *st);
 
+int				stack_size(t_stack *st);
+
+void			results_cleaner(t_stack **results, t_stack *orig);
+
+void			print_stacks(t_stack *a, t_stack *b);
+
+int				exec_mv(t_stack **a, t_stack **b, int mv);
+
 t_stack			*get_at(t_stack *src, int i);
 
 void			set_at(t_stack *src, int i, int v);
 
-int				stack_size(t_stack *st);
+void			destroy_at(t_stack **st, int i);
 
-void			moveset_cleaner(t_stack **results, t_stack *orig);
-
-void			print_stacks(t_stack *a, t_stack *b);
+void			move_at(t_stack **st, int orig, int dst)
 
 /*
 ** part tools

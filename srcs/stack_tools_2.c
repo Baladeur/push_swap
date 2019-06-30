@@ -12,6 +12,33 @@
 
 #include "../includes/push_swap.h"
 
+int		exec_mv(t_stack **a, t_stack **b, int mv)
+{
+	if (mv == 0)
+		return (swap(*a));
+	if (mv == 1)
+		return (swap(*b));
+	if (mv == 2)
+		return (swap(*a) && swap(*b));
+	if (mv == 3)
+		return (push(b, a));
+	if (mv == 4)
+		return (push(a, b));
+	if (mv == 5)
+		return (rotate(a));
+	if (mv == 6)
+		return (rotate(b));
+	if (mv == 7)
+		return (rotate(a) && rotate(b));
+	if (mv == 8)
+		return (rev_rotate(a));
+	if (mv == 9)
+		return (rev_rotate(b));
+	if (mv == 10)
+		return (rev_rotate(a) && rev_rotate(b));
+	return (0);
+}
+
 t_stack	*get_at(t_stack *src, int i)
 {
 	t_stack	*pos;

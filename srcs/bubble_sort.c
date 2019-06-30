@@ -50,6 +50,11 @@ t_stack		*bubble_sort(t_stack *orig)
 
 	a = NULL;
 	moveset = NULL;
+	if (stack_size(orig) > 100)
+	{
+		add_to_stack(&moveset, -1, 1);
+		return (moveset);
+	}
 	size = 0;
 	dupe_stack(orig, &a);
 	size = stack_size(orig);

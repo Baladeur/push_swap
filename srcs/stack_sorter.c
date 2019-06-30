@@ -44,7 +44,7 @@ int			sort_stack(t_stack **a, t_stack **b)
 {
 	char	*str;
 
-	print_stack(*a);
+	print_stacks(*a, *b);
 	while (get_next_line(0, &str) && ft_strlen(str))
 	{
 		if (!(sort_loop(a, b, str, (int)ft_strlen(str))))

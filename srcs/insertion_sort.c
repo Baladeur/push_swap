@@ -87,6 +87,11 @@ t_stack		*insertion_sort(t_stack *orig)
 
 	a = NULL;
 	moveset = NULL;
+	if (stack_size(orig) > 100)
+	{
+		add_to_stack(&moveset, -1, 1);
+		return (moveset);
+	}
 	dupe_stack(orig, &a);
 	i = 1;
 	while (!(is_sort(a)) && i <= stack_size(a))

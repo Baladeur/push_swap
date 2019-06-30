@@ -12,7 +12,16 @@
 
 #include "../includes/push_swap.h"
 
-static void	biggest_to_b(t_stack **moveset, t_stack **a, t_stack **b, int size)
+static t_stack	*size_limit(void)
+{
+	t_stack *mv;
+
+	mv = NULL;
+	add_to_stack(&mv, -1, 1);
+	return (mv);
+}
+
+static void		biggest_to_b(t_stack **mv, t_stack **a, t_stack **b, int size)
 {
 	int max;
 	int id;
@@ -29,18 +38,18 @@ static void	biggest_to_b(t_stack **moveset, t_stack **a, t_stack **b, int size)
 	}
 	while (id > 1 && id <= size)
 	{
-		add_to_stack(moveset, id > size / 2 ? 8 : 5, 1);
+		add_to_stack(mv, id > size / 2 ? 8 : 5, 1);
 		if (id > size / 2)
 			rev_rotate(a);
 		else
 			rotate(a);
 		id += id > size / 2 ? 1 : -1;
 	}
-	add_to_stack(moveset, 4, 1);
+	add_to_stack(mv, 4, 1);
 	push(a, b);
 }
 
-t_stack		*selection_sort(t_stack *orig)
+t_stack			*selection_sort(t_stack *orig)
 {
 	t_stack *moveset;
 	t_stack *a;
@@ -51,8 +60,10 @@ t_stack		*selection_sort(t_stack *orig)
 	a = NULL;
 	b = NULL;
 	moveset = NULL;
+	if (stack_size(orig) > 250)
+		return (size_limit());
 	dupe_stack(orig, &a);
-	i = 0;
+	i = -1;
 	size = stack_size(a);
 	while (a)
 	{
@@ -60,11 +71,8 @@ t_stack		*selection_sort(t_stack *orig)
 		size--;
 	}
 	size = stack_size(orig);
-	while (i < size)
-	{
+	while (++i < size)
 		add_to_stack(&moveset, 3, 1);
-		i++;
-	}
 	destroy_stack(&b);
 	return (moveset);
 }
