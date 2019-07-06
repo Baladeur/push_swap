@@ -62,7 +62,7 @@ t_stack			*selection_sort(t_stack *orig)
 	moveset = NULL;
 	if (stack_size(orig) > 250)
 		return (size_limit());
-	dupe_stack(orig, &a);
+	dupe_stack(orig, &a, 0);
 	i = -1;
 	size = stack_size(a);
 	while (a)

@@ -56,7 +56,7 @@ t_stack		*bubble_sort(t_stack *orig)
 		return (moveset);
 	}
 	size = 0;
-	dupe_stack(orig, &a);
+	dupe_stack(orig, &a, 0);
 	size = stack_size(orig);
 	i = 0;
 	while (i < size - 1 && !(is_sort(a)))

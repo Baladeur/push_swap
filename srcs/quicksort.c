@@ -94,7 +94,7 @@ static void		r_quicksort(t_part *p, t_stack **mv, t_stack **a, t_stack **b)
 	while (k < partitions[1]->ed)
 	{
 		push(id ? b : a, id ? a : b);
-		add_to_stack(mv, id ? 4 : 3, 1);
+		add_to_stack(mv, id ? 3 : 4, 1);
 		k++;
 	}
 	free(partitions[0]);
@@ -112,14 +112,13 @@ t_stack			*quicksort(t_stack *orig)
 	moveset = NULL;
 	a = NULL;
 	b = NULL;
-	dupe_stack(orig, &a);
+	dupe_stack(orig, &a, 0);
 	if (!(init_part(&part, stack_size(a), 'A')))
 	{
 		add_to_stack(&moveset, -1, 0);
 		return (moveset);
 	}
 	r_quicksort(part, &moveset, &a, &b);
-	print_stacks(a, b);
 	destroy_stack(&a);
 	destroy_stack(&b);
 	free(part);

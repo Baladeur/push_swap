@@ -12,6 +12,22 @@
 
 #include "../includes/push_swap.h"
 
+static int exception_ra(t_stack *orig)
+{
+	t_stack *a;
+
+	a = NULL;
+	dupe_stack(orig, &a, 0);
+	destroy_at(&a, stack_size(a) - 1);
+	if (is_sort(a))
+	{
+		destroy_stack(&a);
+		return (1);
+	}
+	destroy_stack(&a);
+	return (0);
+}
+
 static void	gnome_loop(t_stack **a, t_stack **moveset, int size)
 {
 	int b_ascend;
@@ -54,8 +70,13 @@ t_stack		*gnome_sort(t_stack *orig)
 		add_to_stack(&moveset, -1, 1);
 		return (moveset);
 	}
+	if (exception_ra(orig))
+	{
+		add_to_stack(&moveset, 5, 1);
+		return (moveset);
+	}
 	size = 0;
-	dupe_stack(orig, &a);
+	dupe_stack(orig, &a, 0);
 	size = stack_size(orig);
 	gnome_loop(&a, &moveset, size);
 	destroy_stack(&a);

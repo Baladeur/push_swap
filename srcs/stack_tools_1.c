@@ -36,11 +36,11 @@ int		add_to_stack(t_stack **st, int nb, int boolean)
 	return (1);
 }
 
-void	dupe_stack(t_stack *src, t_stack **dest)
+void	dupe_stack(t_stack *src, t_stack **dest, int b)
 {
 	if (src->next)
-		dupe_stack(src->next, dest);
-	add_to_stack(dest, src->value, 0);
+		dupe_stack(src->next, dest, b);
+	add_to_stack(dest, src->value, b);
 }
 
 void	destroy_stack(t_stack **st)
@@ -84,15 +84,16 @@ int		fill_stack(int ac, char **av, t_stack **a)
 
 void	print_stack(t_stack *st)
 {
-	t_stack *pos;
+	int sz;
+	int i;
 
-	pos = st;
-	while (pos)
+	sz = stack_size(st);
+	i = 0;
+	while (++i <= sz)
 	{
-		ft_printf("%d", pos->value);
-		if (pos->next)
-			ft_printf("\t");
-		pos = pos->next;
+		ft_printf("%d", get_at(st, sz - i)->value);
+		if (i <= sz)
+			ft_printf(" ");
 	}
 	ft_printf("\n");
 }

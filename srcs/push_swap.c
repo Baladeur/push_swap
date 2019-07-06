@@ -82,7 +82,7 @@ int			main(int ac, char **av)
 	t_stack *a;
 
 	a = NULL;
-	if (ac == 1 || ac == 2)
+	if (ac == 1)
 		return (0);
 	if (!(fill_stack(ac, av, &a))
 		|| !(results = (t_stack **)malloc(sizeof(t_stack *) * 5)))
@@ -92,12 +92,17 @@ int			main(int ac, char **av)
 	}
 	results[0] = bubble_sort(a);
 	results[1] = gnome_sort(a);
-	results[2] = selection_sort(a);
-	results[3] = insertion_sort(a);
+	results[2] = insertion_sort(a);
+	results[3] = selection_sort(a);
 	results[4] = quicksort(a);
+	print_stack(a);
 	ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d | [4] : %d\n",
 	stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]), stack_size(results[4]));
-	//results_cleaner(results, a);
+	results_checker(results, a);
+	results_cleaner(results, a);
+	results_checker(results, a);
+	ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d | [4] : %d\n",
+	stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]), stack_size(results[4]));
 	destroy_stack(&a);
 	return (shortest_result(&results));
 }
