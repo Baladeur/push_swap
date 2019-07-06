@@ -22,6 +22,7 @@ SRCS		=		./srcs/stack_moveset.c \
 					./srcs/stack_sorter.c
 
 SRC1		=		./srcs/push_swap.c \
+					./srcs/stack_tools_3.c \
 					./srcs/selection_sort.c \
 					./srcs/gnome_sort.c \
 					./srcs/bubble_sort.c \

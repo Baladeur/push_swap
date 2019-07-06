@@ -32,7 +32,7 @@ static void	go_to(t_stack **moveset, t_stack **a, int val)
 	}
 }
 
-static void	move_at(t_stack **moveset, t_stack **a, int i, int d)
+static void	move_to(t_stack **moveset, t_stack **a, int i, int d)
 {
 	t_stack	*b;
 	int		size;
@@ -75,7 +75,7 @@ static void	insertion_loop(t_stack **moveset, t_stack **a, int i)
 	}
 	if (pos < 0)
 		return ;
-	move_at(moveset, a, get_at(*a, size - i)->value,
+	move_to(moveset, a, get_at(*a, size - i)->value,
 			get_at(*a, size - i + pos)->value);
 }
 

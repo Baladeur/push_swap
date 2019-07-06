@@ -24,11 +24,11 @@ void	destroy_at(t_stack **st, int i)
 	if (i > 0)
 		get_at(*st, i - 1)->next = tmp->next;
 	else
-		*st = tmp ->next;
+		*st = tmp->next;
 	free(tmp);
 }
 
-void	move_at(t_stack **st, int orig, int dst)
+/*void	move_at(t_stack **st, int orig, int dst)
 {
 	t_stack *tmp1;
 	t_stack *tmp2;
@@ -41,5 +41,8 @@ void	move_at(t_stack **st, int orig, int dst)
 	tmp1->next = get_at(*st, dst - dst > orig ? 1 : 0);
 	if (dst == 0)
 		*st = tmp1;
-	else 
-}
+	else if (dst < orig)
+	{
+		tmp1->next = get_at(*st, );
+	}
+}*/

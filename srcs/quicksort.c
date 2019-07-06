@@ -119,7 +119,9 @@ t_stack			*quicksort(t_stack *orig)
 		return (moveset);
 	}
 	r_quicksort(part, &moveset, &a, &b);
+	print_stacks(a, b);
 	destroy_stack(&a);
 	destroy_stack(&b);
+	free(part);
 	return (moveset);
 }

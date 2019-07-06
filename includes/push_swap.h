@@ -59,7 +59,7 @@ void			set_at(t_stack *src, int i, int v);
 
 void			destroy_at(t_stack **st, int i);
 
-void			move_at(t_stack **st, int orig, int dst)
+void			move_at(t_stack **st, int orig, int dst);
 
 /*
 ** part tools
