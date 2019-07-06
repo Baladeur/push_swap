@@ -105,7 +105,7 @@ static void	moveset_cleaner(t_stack **res, t_stack **a, t_stack **b, int sz)
 		else if (secure_empty(res, a, b, i))
 			destroy_at(res, sz - i);
 		else if (mv > 4)
-			i += 1 - rota_cleaner(res, a, b, i);
+			i += 1 - rotation_cleaner(res, a, b, i);
 		else if (++i)
 			exec_mv(a, b, mv);
 		sz = stack_size(*res);
