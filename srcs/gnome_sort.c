@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-static int exception_ra(t_stack *orig)
+static int	exception_ra(t_stack *orig)
 {
 	t_stack *a;
 

@@ -32,9 +32,9 @@ void	results_checker(t_stack **results, t_stack *orig)
 {
 	t_stack *a;
 	t_stack *b;
-	int size;
-	int i;
-	int k;
+	int		size;
+	int		i;
+	int		k;
 
 	i = 0;
 	while (i < 5)
@@ -61,7 +61,7 @@ int		moveset_checker(t_stack *moveset, t_stack *orig)
 	int		size;
 	int		i;
 	int		boolean;
-	
+
 	i = 0;
 	a = NULL;
 	b = NULL;
@@ -74,22 +74,3 @@ int		moveset_checker(t_stack *moveset, t_stack *orig)
 	destroy_stack(&b);
 	return (boolean);
 }
-
-/*void	move_at(t_stack **st, int orig, int dst)
-{
-	t_stack *tmp1;
-	t_stack *tmp2;
-
-	if (orig == dst)
-		return ;
-	tmp1 = get_at(*st, orig);
-	if (orig == 0)
-		*st = tmp1->next;
-	tmp1->next = get_at(*st, dst - dst > orig ? 1 : 0);
-	if (dst == 0)
-		*st = tmp1;
-	else if (dst < orig)
-	{
-		tmp1->next = get_at(*st, );
-	}
-}*/

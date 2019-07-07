@@ -43,11 +43,15 @@ void			dupe_stack(t_stack *src, t_stack **dest, int b);
 
 int				fill_stack(int ac, char **av, t_stack **a);
 
-void			print_stack(t_stack *st);
-
 int				stack_size(t_stack *st);
 
 void			results_cleaner(t_stack **res, t_stack *orig);
+
+void			safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o);
+
+int				secure_empty(t_stack **res, t_stack **a, t_stack **b, int i);
+
+int				rota_cleaner(t_stack **res, t_stack **a, t_stack **b, int i);
 
 void			print_stacks(t_stack *a, t_stack *b);
 

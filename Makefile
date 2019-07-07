@@ -23,6 +23,7 @@ SRCS		=		./srcs/stack_moveset.c \
 
 SRC1		=		./srcs/push_swap.c \
 					./srcs/result_cleaner.c \
+					./srcs/safer_cleaner.c \
 					./srcs/stack_tools_3.c \
 					./srcs/selection_sort.c \
 					./srcs/gnome_sort.c \

@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-static int	secure_empty(t_stack **res, t_stack **a, t_stack **b, int i)
+int			secure_empty(t_stack **res, t_stack **a, t_stack **b, int i)
 {
 	int id;
 	int mv;
@@ -56,7 +56,7 @@ static int	rotation_replace(t_stack **res, t_stack *st, int *c, int i)
 	return (1);
 }
 
-static int rotation_cleaner(t_stack **res, t_stack **a, t_stack **b, int i)
+int			rota_cleaner(t_stack **res, t_stack **a, t_stack **b, int i)
 {
 	int c[3];
 	int sz;
@@ -85,13 +85,13 @@ static int rotation_cleaner(t_stack **res, t_stack **a, t_stack **b, int i)
 	return (0);
 }
 
-static void	moveset_cleaner(t_stack **res, t_stack **a, t_stack **b, int sz)
+static void	moveset_cleaner(t_stack **res, t_stack **a, int sz, int i)
 {
+	t_stack *b;
 	int		mv;
 	int		mv2;
-	int		i;
 
-	i = 1;
+	b = NULL;
 	while (i <= sz)
 	{
 		mv = get_at(*res, sz - i)->value;
@@ -102,33 +102,44 @@ static void	moveset_cleaner(t_stack **res, t_stack **a, t_stack **b, int sz)
 			destroy_at(res, sz - i - 1);
 			i -= i > 1 ? 1 : 0;
 		}
-		else if (secure_empty(res, a, b, i))
+		else if (secure_empty(res, a, &b, i))
 			destroy_at(res, sz - i);
 		else if (mv > 4)
-			i += 1 - rotation_cleaner(res, a, b, i);
+			i += 1 - rota_cleaner(res, a, &b, i);
 		else if (++i)
-			exec_mv(a, b, mv);
+			exec_mv(a, &b, mv);
 		sz = stack_size(*res);
 	}
+	destroy_stack(&b);
 }
 
 void		results_cleaner(t_stack **res, t_stack *orig)
 {
 	t_stack	*a;
-	t_stack *b;
+	t_stack *res_back;
 	int		i;
 
-	i = 0;
-	while (i < 5)
+	i = -1;
+	while (++i < 5)
 	{
+		a = NULL;
+		res_back = NULL;
 		while (stack_size(orig) > 30 && i < 4)
 			i++;
-		a = NULL;
 		dupe_stack(orig, &a, 0);
-		b = NULL;
-		moveset_cleaner(res + i, &a, &b, stack_size(res[i]));
+		dupe_stack(res[i], &res_back, 1);
+		moveset_cleaner(res + i, &a, stack_size(res[i]), 1);
 		destroy_stack(&a);
-		destroy_stack(&b);
-		i++;
+		if (!(moveset_checker(res[i], orig)))
+		{
+			a = NULL;
+			dupe_stack(orig, &a, 0);
+			destroy_stack(res + i);
+			res[i] = res_back;
+			safer_cleaner(res + i, &a, stack_size(res[i]), orig);
+			destroy_stack(&a);
+		}
+		else
+			destroy_stack(&res_back);
 	}
 }

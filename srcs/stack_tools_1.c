@@ -81,19 +81,3 @@ int		fill_stack(int ac, char **av, t_stack **a)
 	}
 	return (1);
 }
-
-void	print_stack(t_stack *st)
-{
-	int sz;
-	int i;
-
-	sz = stack_size(st);
-	i = 0;
-	while (++i <= sz)
-	{
-		ft_printf("%d", get_at(st, sz - i)->value);
-		if (i <= sz)
-			ft_printf(" ");
-	}
-	ft_printf("\n");
-}
