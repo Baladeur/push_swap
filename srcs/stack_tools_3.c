@@ -28,6 +28,21 @@ void	destroy_at(t_stack **st, int i)
 	free(tmp);
 }
 
+void	destroy_stack(t_stack **st)
+{
+	t_stack	*tmp;
+	t_stack	*pos;
+
+	pos = *st;
+	while (pos)
+	{
+		tmp = pos->next;
+		free(pos);
+		pos = tmp;
+	}
+	*st = NULL;
+}
+
 void	results_checker(t_stack **results, t_stack *orig)
 {
 	t_stack *a;

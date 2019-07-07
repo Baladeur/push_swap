@@ -90,15 +90,17 @@ int			main(int ac, char **av)
 		destroy_stack(&a);
 		return (write(2, "Error\n", 6));
 	}
-	results[0] = bubble_sort(a);
-	results[1] = gnome_sort(a);
-	results[2] = insertion_sort(a);
-	results[3] = selection_sort(a);
-	results[4] = quicksort(a);
-	results_cleaner(results, a);
-	results_checker(results, a);
-	ft_printf("[0] : %d | [1] : %d | [2] : %d | [3] : %d | [4] : %d\n",
-	stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]), stack_size(results[4]));
-	destroy_stack(&a);
-	return (shortest_result(&results));
+	if (stack_size(a) > 1)
+	{
+		results[0] = bubble_sort(a);
+		results[1] = gnome_sort(a);
+		results[2] = insertion_sort(a);
+		results[3] = selection_sort(a);
+		results[4] = quicksort(a);
+		results_cleaner(results, a);
+		destroy_stack(&a);
+		return (shortest_result(&results));
+	}
+	else
+		return (0);
 }

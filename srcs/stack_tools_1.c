@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-int		add_to_stack(t_stack **st, int nb, int boolean)
+int			add_to_stack(t_stack **st, int nb, int boolean)
 {
 	t_stack	*pos;
 
@@ -36,29 +36,37 @@ int		add_to_stack(t_stack **st, int nb, int boolean)
 	return (1);
 }
 
-void	dupe_stack(t_stack *src, t_stack **dest, int b)
+void		dupe_stack(t_stack *src, t_stack **dest, int b)
 {
 	if (src->next)
 		dupe_stack(src->next, dest, b);
 	add_to_stack(dest, src->value, b);
 }
 
-void	destroy_stack(t_stack **st)
+static int	skip_to_next_nb(char *av, int *k, int b)
 {
-	t_stack	*tmp;
-	t_stack	*pos;
+	char c[2];
 
-	pos = *st;
-	while (pos)
+	while (av[*k])
 	{
-		tmp = pos->next;
-		free(pos);
-		pos = tmp;
+		c[0] = av[*k];
+		c[1] = av[*k + 1];
+		if (b && (((c[0] == '-' || c[1] == '+') && c[1] >= '0' && c[1] <= '9')
+			|| (c[0] >= '0' && c[0] <= '9')))
+			return (1);
+		else if (((c[0] == '-' || c[1] == '+') && c[1] >= '0' && c[1] <= '9')
+			|| (c[0] >= '0' && c[0] <= '9'))
+			*k += 1;
+		else if (c[0] != ' ' && c[0] != 10 && c[0] != '	')
+			return (0);
+		else if ((*k += 1) >= 0)
+			b = 1;
+
 	}
-	*st = NULL;
+	return (1);
 }
 
-int		fill_stack(int ac, char **av, t_stack **a)
+int			fill_stack(int ac, char **av, t_stack **a)
 {
 	long int	nb;
 	int			i;
@@ -66,17 +74,18 @@ int		fill_stack(int ac, char **av, t_stack **a)
 
 	i = 1;
 	while (i < ac)
-	{
+	{	
 		k = 0;
-		while (av[i][k] && !(k && (av[i][k] == '-' || av[i][k] == '+'))
-				&& ((av[i][k] >= '0' && av[i][k] <= '9') || (av[i][k] == '-')
-					|| (av[i][k] == '+')))
-			k++;
-		if (av[i][k])
+		if (!(skip_to_next_nb(av[i], &k, 1)))
 			return (0);
-		nb = ft_atoi_l(av[i]);
-		if (nb != (long int)((int)nb) || !(add_to_stack(a, (int)nb, 0)))
-			return (0);
+		while (av[i][k])
+		{
+			nb = ft_atoi_l(av[i] + k);
+			if (nb != (long int)((int)nb) || !(add_to_stack(a, (int)nb, 0)))
+				return (0);
+			if (!(skip_to_next_nb(av[i], &k, 0)))
+				return (0);
+		}
 		i++;
 	}
 	return (1);
