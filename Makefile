@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=		push_swap
+NAME1		=		push_swap
 
 NAME2		=		checker
 
@@ -43,13 +43,17 @@ OBJ2		=		$(patsubst ./srcs/%.c, %.o, $(SRC2))
 FLAGS		=		-Wall -Werror -Wextra
 
 
-all:		$(NAME)
+all:		$(NAME1) $(NAME2)
 
-$(NAME):	$(SRCS) $(SRC1) $(SRC2)
+$(NAME1):	$(SRCS) $(SRC1)
 	make -C libft
-	gcc $(FLAGS) -c $(SRCS) $(SRC1) $(SRC2)
-	gcc $(FLAGS) -o $(NAME) $(OBJS) $(OBJ1) $(LIB)
-	gcc $(FLAGS) -o $(NAME2) $(OBJS) $(OBJ2) $(LIB)
+	gcc $(FLAGS) -c $(SRCS) $(SRC1)
+	gcc $(FLAGS) -o $(NAME1) $(OBJS) $(OBJ1) $(LIB)
+
+$(NAME2):	$(SRCS) $(SRC2)
+	make -C libft
+	gcc $(FLAGS) -c $(SRCS) $(SRC2)
+	gcc $(FLAGS) -o $(NAME1) $(OBJS) $(OBJ2) $(LIB)
 
 clean:
 	make -C libft clean
@@ -59,9 +63,7 @@ clean:
 
 fclean:		clean
 	make -C libft fclean
-	rm -rf $(NAME)
+	rm -rf $(NAME1)
 	rm -rf $(NAME2)
 
 re: 		fclean all
-
-.PHONY : all $(NAME) clean fclean re
