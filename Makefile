@@ -12,8 +12,6 @@
 
 NAME		=		push_swap
 
-NAME2		=		checker
-
 LIB			=		./libft/libft.a
 
 SRCS		=		./srcs/stack_moveset.c \
@@ -64,4 +62,4 @@ fclean:		clean
 
 re: 		fclean all
 
-.PHONY : all $(NAME1) $(NAME2) clean fclean re
+.PHONY : all $(NAME) clean fclean re
