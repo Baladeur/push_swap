@@ -40,20 +40,20 @@ OBJ1		=		$(patsubst ./srcs/%.c, %.o, $(SRC1))
 
 OBJ2		=		$(patsubst ./srcs/%.c, %.o, $(SRC2))
 
-FLAGS		=		-Wall -Werror -Wextra
+CFAGS		=		-Wall -Werror -Wextra
 
 
 all:		$(NAME1) $(NAME2)
 
 $(NAME1):	$(SRCS) $(SRC1)
 	make -C libft
-	gcc $(FLAGS) -c $(SRCS) $(SRC1)
-	gcc $(FLAGS) -o $(NAME1) $(OBJS) $(OBJ1) $(LIB)
+	gcc $(CFAGS) -c $(SRCS) $(SRC1)
+	gcc $(CFAGS) -o $(NAME1) $(OBJS) $(OBJ1) $(LIB)
 
 $(NAME2):	$(SRCS) $(SRC2)
 	make -C libft
-	gcc $(FLAGS) -c $(SRCS) $(SRC2)
-	gcc $(FLAGS) -o $(NAME2) $(OBJS) $(OBJ2) $(LIB)
+	gcc $(CFAGS) -c $(SRCS) $(SRC2)
+	gcc $(CFAGS) -o $(NAME2) $(OBJS) $(OBJ2) $(LIB)
 
 clean:
 	make -C libft clean

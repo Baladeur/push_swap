@@ -38,9 +38,12 @@ int			add_to_stack(t_stack **st, int nb, int boolean)
 
 void		dupe_stack(t_stack *src, t_stack **dest, int b)
 {
-	if (src->next)
-		dupe_stack(src->next, dest, b);
-	add_to_stack(dest, src->value, b);
+	if (src)
+	{
+		if (src->next)
+			dupe_stack(src->next, dest, b);
+		add_to_stack(dest, src->value, b);
+	}
 }
 
 static int	skip_to_next_nb(char *av, int *k, int b)
