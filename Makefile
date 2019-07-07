@@ -53,7 +53,7 @@ $(NAME1):	$(SRCS) $(SRC1)
 $(NAME2):	$(SRCS) $(SRC2)
 	make -C libft
 	gcc $(FLAGS) -c $(SRCS) $(SRC2)
-	gcc $(FLAGS) -o $(NAME1) $(OBJS) $(OBJ2) $(LIB)
+	gcc $(FLAGS) -o $(NAME2) $(OBJS) $(OBJ2) $(LIB)
 
 clean:
 	make -C libft clean
