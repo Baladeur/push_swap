@@ -12,6 +12,8 @@
 
 NAME		=		push_swap
 
+NAME2		=		checker
+
 LIB			=		./libft/libft.a
 
 SRCS		=		./srcs/stack_moveset.c \
