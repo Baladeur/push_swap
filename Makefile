@@ -19,12 +19,12 @@ LIB			=		./libft/libft.a
 SRCS		=		./srcs/stack_moveset.c \
 					./srcs/stack_tools_1.c \
 					./srcs/stack_tools_2.c \
+					./srcs/stack_tools_3.c \
 					./srcs/stack_sorter.c
 
 SRC1		=		./srcs/push_swap.c \
 					./srcs/result_cleaner.c \
 					./srcs/safer_cleaner.c \
-					./srcs/stack_tools_3.c \
 					./srcs/selection_sort.c \
 					./srcs/gnome_sort.c \
 					./srcs/bubble_sort.c \
