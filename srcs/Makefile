@@ -5,31 +5,36 @@
 #                                                     +:+ +:+         +:+      #
 #    By: tferrieu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/15 19:37:53 by tferrieu          #+#    #+#              #
-#    Updated: 2019/04/28 19:31:55 by tferrieu         ###   ########.fr        #
+#    Created: 2019/07/13 17:33:01 by tferrieu          #+#    #+#              #
+#    Updated: 2019/07/13 17:33:02 by tferrieu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME1		=		push_swap
+CC		=	gcc
 
-NAME2		=		checker
+AR		=	ar rc
 
-all:
-	make -C srcs\ checker
-	make -C srcs\ push_swap
+SRC		=	stack_moveset.c \
+			stack_tools_1.c \
+			stack_tools_2.c \
+			stack_tools_3.c \
+			stack_sorter.c
 
-$(NAME1):
-	make -C srcs\ push_swap
+OBJ		=	$(SRC:.c=.o)
 
-$(NAME2):
-	make -C srcs\ checker
+NAME	=	push_swap.a
 
-clean:
-	make -C srcs\ checker clean
-	make -C srcs\ push_swap clean
+CFLAGS	=	-Wall -Werror -Wextra
 
-fclean:		clean
-	make -C srcs\ checker fclean
-	make -C srcs\ push_swap fclean
+all :		$(NAME)
 
-re: 		fclean all
+$(NAME) :	$(OBJ) ../includes/push_swap.h
+			$(AR) $(NAME) $(OBJ)
+
+clean :
+			/bin/rm -Rf $(OBJ)
+
+fclean :	clean
+			/bin/rm -Rf $(NAME)
+
+re :		fclean all

@@ -5,31 +5,36 @@
 #                                                     +:+ +:+         +:+      #
 #    By: tferrieu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/15 19:37:53 by tferrieu          #+#    #+#              #
-#    Updated: 2019/04/28 19:31:55 by tferrieu         ###   ########.fr        #
+#    Created: 2019/07/13 17:33:07 by tferrieu          #+#    #+#              #
+#    Updated: 2019/07/13 17:33:08 by tferrieu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME1		=		push_swap
+CC		=	gcc
 
-NAME2		=		checker
+SRC		=	checker.c
 
-all:
-	make -C srcs\ checker
-	make -C srcs\ push_swap
+OBJ		=	$(SRC:.c=.o)
 
-$(NAME1):
-	make -C srcs\ push_swap
+NAME	=	../checker
 
-$(NAME2):
-	make -C srcs\ checker
+CFLAGS	=	-Wall -Werror -Wextra
 
-clean:
-	make -C srcs\ checker clean
-	make -C srcs\ push_swap clean
+all :		$(NAME)
 
-fclean:		clean
-	make -C srcs\ checker fclean
-	make -C srcs\ push_swap fclean
+$(NAME) :	$(OBJ) ../includes/push_swap.h
+			make -C ../libft
+			make -C ../srcs
+			$(CC) $(CFLAGS) $(OBJ) -o $(NAME) ../libft/libft.a ../srcs/push_swap.a
 
-re: 		fclean all
+clean :
+			make -C ../libft clean
+			make -C ../srcs clean
+			/bin/rm -Rf $(OBJ)
+
+fclean :	clean
+			make -C ../libft fclean
+			make -C ../srcs fclean
+			/bin/rm -Rf $(NAME)
+
+re :		fclean all
