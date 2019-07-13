@@ -16,13 +16,16 @@ static void	destroy_moveset(t_stack **moveset)
 {
 	int i;
 
-	i = 0;
-	while (i < 5)
+	if (moveset)
 	{
-		destroy_stack(moveset + i);
-		i++;
+		i = 0;
+		while (i < 5)
+		{
+			destroy_stack(moveset + i);
+			i++;
+		}
+		free(moveset);
 	}
-	free(moveset);
 }
 
 static void	print_moveset(t_stack *moveset)
@@ -90,7 +93,7 @@ int			main(int ac, char **av)
 		destroy_stack(&a);
 		return (write(2, "Error\n", 6));
 	}
-	if (stack_size(a) > 1)
+	if (stack_size(a) > 1 && !is_sort(a))
 	{
 		results[0] = bubble_sort(a);
 		results[1] = gnome_sort(a);
