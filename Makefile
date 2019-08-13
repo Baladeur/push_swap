@@ -25,11 +25,11 @@ $(NAME2):
 	make -C srcs\ checker
 
 clean:
-	make -C srcs\ checker clean
-	make -C srcs\ push_swap clean
+	@make -C srcs\ checker clean
+	@make -C srcs\ push_swap clean
 
 fclean:		clean
-	make -C srcs\ checker fclean
-	make -C srcs\ push_swap fclean
+	@make -C srcs\ checker fclean
+	@make -C srcs\ push_swap fclean
 
 re: 		fclean all

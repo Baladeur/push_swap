@@ -64,7 +64,6 @@ static int	skip_to_next_nb(char *av, int *k, int b)
 			return (0);
 		else if ((*k += 1) >= 0)
 			b = 1;
-
 	}
 	return (1);
 }
@@ -77,7 +76,7 @@ int			fill_stack(int ac, char **av, t_stack **a)
 
 	i = 1;
 	while (i < ac)
-	{	
+	{
 		k = 0;
 		if (!(skip_to_next_nb(av[i], &k, 1)))
 			return (0);

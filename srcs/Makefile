@@ -32,9 +32,9 @@ $(NAME) :	$(OBJ) ../includes/push_swap.h
 			$(AR) $(NAME) $(OBJ)
 
 clean :
-			/bin/rm -Rf $(OBJ)
+			@rm -Rf $(OBJ)
 
 fclean :	clean
-			/bin/rm -Rf $(NAME)
+			@rm -Rf $(NAME)
 
 re :		fclean all

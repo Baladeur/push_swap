@@ -9,3 +9,5 @@ checker
 push_swap
 srcs/out1
 srcs/out2
+test.sh
+tester

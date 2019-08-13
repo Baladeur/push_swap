@@ -38,11 +38,11 @@ $(NAME) :	$(OBJ) ../includes/push_swap.h
 clean :
 			make -C ../libft clean
 			make -C ../srcs clean
-			/bin/rm -Rf $(OBJ)
+			@rm -Rf $(OBJ)
 
 fclean :	clean
 			make -C ../libft fclean
 			make -C ../srcs fclean
-			/bin/rm -Rf $(NAME)
+			@rm -Rf $(NAME)
 
 re :		fclean all

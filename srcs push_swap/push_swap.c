@@ -100,8 +100,10 @@ int			main(int ac, char **av)
 		results[2] = insertion_sort(a);
 		results[3] = selection_sort(a);
 		results[4] = quicksort(a);
-		results_cleaner(results, a);
+		//ft_printf("0 : %d | 1 : %d | 2 : %d | 3 : %d | 4 : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]), stack_size(results[4]));
+		results_cleaner(results, a, -1);
 		destroy_stack(&a);
+		//ft_printf("0 : %d | 1 : %d | 2 : %d | 3 : %d | 4 : %d\n", stack_size(results[0]), stack_size(results[1]), stack_size(results[2]), stack_size(results[3]), stack_size(results[4]));
 		return (shortest_result(&results));
 	}
 	else

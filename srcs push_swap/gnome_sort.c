@@ -15,11 +15,22 @@
 static int	exception_ra(t_stack *orig)
 {
 	t_stack *a;
+	int		i;
+	int		m;
+	int		sz;
 
 	a = NULL;
+	sz = stack_size(orig);
+	i = get_at(orig, sz - 1)->value;
+	m = i;
 	dupe_stack(orig, &a, 0);
-	destroy_at(&a, stack_size(a) - 1);
-	if (is_sort(a))
+	destroy_at(&a, sz - 1);
+	while (--sz)
+	{
+		if (get_at(orig, sz - 1)->value >= m)
+			m = get_at(orig, sz - 1)->value;
+	}
+	if (is_sort(a) && i == m)
 	{
 		destroy_stack(&a);
 		return (1);

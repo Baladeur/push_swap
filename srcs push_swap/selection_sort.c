@@ -38,12 +38,12 @@ static void		biggest_to_b(t_stack **mv, t_stack **a, t_stack **b, int size)
 	}
 	while (id > 1 && id <= size)
 	{
-		add_to_stack(mv, id > size / 2 ? 8 : 5, 1);
-		if (id > size / 2)
+		add_to_stack(mv, id > size / 2 + 1 ? 8 : 5, 1);
+		if (id > size / 2 + 1)
 			rev_rotate(a);
 		else
 			rotate(a);
-		id += id > size / 2 ? 1 : -1;
+		id += id > size / 2 + 1 ? 1 : -1;
 	}
 	add_to_stack(mv, 4, 1);
 	push(a, b);

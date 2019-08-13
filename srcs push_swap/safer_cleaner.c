@@ -33,6 +33,14 @@ static void	clean_loop(t_stack **res, t_stack **a, t_stack **b, int *mv)
 		exec_mv(a, b, mv[0]);
 }
 
+static void	init_cleaner(t_stack **a, t_stack **b, t_stack **c, t_stack **d)
+{
+	*a = NULL;
+	*b = NULL;
+	*c = NULL;
+	*d = NULL;
+}
+
 void		safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o)
 {
 	t_stack *b;
@@ -41,10 +49,7 @@ void		safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o)
 	t_stack *d_a;
 	int		mv[2][3];
 
-	dummy = NULL;
-	d_b = NULL;
-	d_a = NULL;
-	b = NULL;
+	init_cleaner(&b, &dummy, &d_b, &d_a);
 	dupe_stack(*res, &dummy, 1);
 	dupe_stack(*a, &d_a, 0);
 	mv[0][2] = 1;
@@ -53,9 +58,7 @@ void		safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o)
 	{
 		clean_loop(&dummy, &d_a, &d_b, mv[0]);
 		if (moveset_checker(dummy, o))
-		{
 			clean_loop(res, a, &b, mv[1]);
-		}
 		else
 			break ;
 	}

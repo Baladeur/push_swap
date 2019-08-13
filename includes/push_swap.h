@@ -45,7 +45,7 @@ int				fill_stack(int ac, char **av, t_stack **a);
 
 int				stack_size(t_stack *st);
 
-void			results_cleaner(t_stack **res, t_stack *orig);
+void			results_cleaner(t_stack **res, t_stack *orig, int i);
 
 void			safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o);
 
