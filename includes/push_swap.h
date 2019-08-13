@@ -26,7 +26,7 @@ typedef struct	s_stack
 
 typedef struct	s_part
 {
-	int 	id;
+	int		id;
 	int		op;
 	int		ed;
 }				t_part;

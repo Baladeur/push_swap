@@ -1,6 +1,7 @@
 *.o
 *.old
 *.swp
+*.a
 a.out
 .DS_Store
 .vscode

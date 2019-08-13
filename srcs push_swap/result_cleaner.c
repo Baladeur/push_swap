@@ -38,11 +38,10 @@ static int	rotation_replace(t_stack **res, t_stack *st, int *c, int i)
 	while (c[0] % sz[1] && i <= sz[0])
 	{
 		mv = get_at(*res, sz[0] - i);
-		if (mv->value == 5 + id || mv->value == 8 + id)
+		if ((mv->value == 5 + id || mv->value == 8 + id) && c[1]-- > -1)
 		{
 			mv->value = c[0] % sz[1] > sz[1] / 2 ? 8 + id : 5 + id;
 			c[0] += c[0] % sz[1] > sz[1] / 2 ? 1 : -1;
-			c[1]--;
 		}
 		i++;
 	}
@@ -62,7 +61,7 @@ int			rota_cleaner(t_stack **res, t_stack **a, t_stack **b, int i)
 	int sz;
 	int mv;
 	int d;
-	
+
 	sz = stack_size(*res);
 	d = (get_at(*res, sz - i)->value - 5) % 3;
 	c[0] = 0;
@@ -94,7 +93,6 @@ static void	moveset_cleaner(t_stack **res, t_stack **a, int sz, int i)
 	b = NULL;
 	while (i <= sz)
 	{
-		//ft_printf("%d \t| %d\n", i, stack_size(*res));
 		mv = get_at(*res, sz - i)->value;
 		mv2 = i < sz ? get_at(*res, sz - i - 1)->value : -1;
 		if ((mv == 3 && mv2 == 4) || (mv == 4 && mv2 == 3))
@@ -127,7 +125,6 @@ void		results_cleaner(t_stack **res, t_stack *orig, int i)
 			i++;
 		dupe_stack(orig, &a, 0);
 		dupe_stack(res[i], &res_back, 1);
-		//ft_printf("\nCLEANING MOVESET #%d\n", i);
 		moveset_cleaner(res + i, &a, stack_size(res[i]), 1);
 		destroy_stack(&a);
 		if (!(moveset_checker(res[i], orig)))
