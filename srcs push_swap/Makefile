@@ -24,13 +24,19 @@ SRC		=	push_swap.c \
 
 OBJ		=	$(SRC:.c=.o)
 
+OBJS	=	../srcs/stack_moveset.c \
+			../srcs/stack_tools_1.c \
+			../srcs/stack_tools_2.c \
+			../srcs/stack_tools_3.c \
+			../srcs/stack_sorter.c
+
 NAME	=	../push_swap
 
 CFLAGS	=	-Wall -Werror -Wextra
 
 all :		$(NAME)
 
-$(NAME) :	$(OBJ) ../includes/push_swap.h
+$(NAME) :	$(OBJ) $(OBJS) ../includes/push_swap.h
 			make -C ../libft
 			make -C ../srcs
 			$(CC) $(CFLAGS) $(OBJ) -o $(NAME) ../libft/libft.a ../srcs/push_swap.a
