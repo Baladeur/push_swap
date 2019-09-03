@@ -87,8 +87,8 @@ int			main(int ac, char **av)
 	a = NULL;
 	if (ac == 1)
 		return (0);
-	if (!(fill_stack(ac, av, &a))
-		|| !(results = (t_stack **)malloc(sizeof(t_stack *) * 5)))
+	if (!(fill_stack(ac, av, &a)) || !(stack_size(a) == 1 || is_sort(a)
+		|| (results = (t_stack **)malloc(sizeof(t_stack *) * 5))))
 	{
 		destroy_stack(&a);
 		return (write(2, "Error\n", 6));
@@ -104,6 +104,6 @@ int			main(int ac, char **av)
 		destroy_stack(&a);
 		return (shortest_result(&results));
 	}
-	else
-		return (0);
+	destroy_stack(&a);
+	return (0);
 }
