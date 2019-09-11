@@ -14,22 +14,38 @@ NAME1		=		push_swap
 
 NAME2		=		checker
 
-all:
-	make -C srcs\ checker
-	make -C srcs\ push_swap
+SRC		=	srcs/stack_moveset.c \
+			srcs/stack_tools_1.c \
+			srcs/stack_tools_2.c \
+			srcs/stack_tools_3.c \
+			srcs/stack_sorter.c
 
-$(NAME1):
-	make -C srcs\ push_swap
+SRC2	=	srcs\ checker/checker.c
 
-$(NAME2):
-	make -C srcs\ checker
+SRC1	=	srcs\ push_swap/push_swap.c \
+			srcs\ push_swap/result_cleaner.c \
+			srcs\ push_swap/safer_cleaner.c \
+			srcs\ push_swap/selection_sort.c \
+			srcs\ push_swap/gnome_sort.c \
+			srcs\ push_swap/bubble_sort.c \
+			srcs\ push_swap/quicksort.c \
+			srcs\ push_swap/partition_tools.c \
+			srcs\ push_swap/insertion_sort.c
+
+all: $(NAME1) $(NAME2)
+
+$(NAME1): $(SRC) $(SRC1)
+	$(MAKE) -C srcs\ push_swap
+
+$(NAME2): $(SRC) $(SRC2)
+	$(MAKE) -C srcs\ checker
 
 clean:
-	@make -C srcs\ checker clean
-	@make -C srcs\ push_swap clean
+	@$(MAKE) -C srcs\ checker clean
+	@$(MAKE) -C srcs\ push_swap clean
 
 fclean:		clean
-	@make -C srcs\ checker fclean
-	@make -C srcs\ push_swap fclean
+	@$(MAKE) -C srcs\ checker fclean
+	@$(MAKE) -C srcs\ push_swap fclean
 
 re: 		fclean all

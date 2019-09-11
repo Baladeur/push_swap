@@ -37,18 +37,18 @@ CFLAGS	=	-Wall -Werror -Wextra
 all :		$(NAME)
 
 $(NAME) :	$(OBJ) $(OBJS) ../includes/push_swap.h
-			make -C ../libft
-			make -C ../srcs
+			$(MAKE) -C ../libft
+			$(MAKE) -C ../srcs
 			$(CC) $(CFLAGS) $(OBJ) -o $(NAME) ../libft/libft.a ../srcs/push_swap.a
 
 clean :
-			make -C ../libft clean
-			make -C ../srcs clean
+			$(MAKE) -C ../libft clean
+			$(MAKE) -C ../srcs clean
 			@rm -Rf $(OBJ)
 
 fclean :	clean
-			make -C ../libft fclean
-			make -C ../srcs fclean
+			$(MAKE) -C ../libft fclean
+			$(MAKE) -C ../srcs fclean
 			@rm -Rf $(NAME)
 
 re :		fclean all
