@@ -58,7 +58,7 @@ static int	strnumcheck(char *av, int nb)
 	while (nb != 0 && ++c2)
 		nb /= 10;
 	if (av[0] == '-' || av[0] == '+')
-	c1--;
+		c1--;
 	return (c1 != c2);
 }
 
@@ -102,7 +102,8 @@ int			fill_stack(int ac, char **av, t_stack **a)
 		while (av[i][k])
 		{
 			nb = ft_atoi_l(av[i] + k);
-			if (nb != (long int)((int)nb) || strnumcheck(av[i] + k, nb) || !(add_to_stack(a, (int)nb, 0)))
+			if (nb != (long int)((int)nb) || strnumcheck(av[i] + k, nb)
+				|| !(add_to_stack(a, (int)nb, 0)))
 				return (0);
 			if (!(skip_to_next_nb(av[i], &k, 0)))
 				return (0);
