@@ -46,6 +46,22 @@ void		dupe_stack(t_stack *src, t_stack **dest, int b)
 	}
 }
 
+static int	strnumcheck(char *av, int nb)
+{
+	int c1;
+	int c2;
+
+	c1 = av[0] == '-' || av[0] == '+' ? 1 : 0;
+	c2 = 0;
+	while (ft_isdigit(av[c1]))
+		c1++;
+	while (nb != 0 && ++c2)
+		nb /= 10;
+	if (av[0] == '-' || av[0] == '+')
+	c1--;
+	return (c1 != c2);
+}
+
 static int	skip_to_next_nb(char *av, int *k, int b)
 {
 	char c[2];
@@ -86,7 +102,7 @@ int			fill_stack(int ac, char **av, t_stack **a)
 		while (av[i][k])
 		{
 			nb = ft_atoi_l(av[i] + k);
-			if (nb != (long int)((int)nb) || !(add_to_stack(a, (int)nb, 0)))
+			if (nb != (long int)((int)nb) || strnumcheck(av[i] + k, nb) || !(add_to_stack(a, (int)nb, 0)))
 				return (0);
 			if (!(skip_to_next_nb(av[i], &k, 0)))
 				return (0);
