@@ -59,6 +59,8 @@ int				exec_mv(t_stack **a, t_stack **b, int mv);
 
 t_stack			*get_at(t_stack *src, int i);
 
+t_stack			*find_nb(t_stack *st, int i);
+
 void			set_at(t_stack *src, int i, int v);
 
 void			destroy_at(t_stack **st, int i);
@@ -66,6 +68,8 @@ void			destroy_at(t_stack **st, int i);
 void			results_checker(t_stack **results, t_stack *orig);
 
 int				moveset_checker(t_stack *moveset, t_stack *orig);
+
+void			quickbrute(t_part *p, t_stack **mv, t_stack **a, t_stack **b);
 
 /*
 ** part tools

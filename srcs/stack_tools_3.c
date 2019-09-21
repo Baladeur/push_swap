@@ -12,6 +12,20 @@
 
 #include "../includes/push_swap.h"
 
+t_stack	*find_nb(t_stack *st, int i)
+{
+	t_stack *pos;
+
+	pos = st;
+	while (pos)
+	{
+		if (pos->value == i)
+			return (pos);
+		pos = pos->next;
+	}
+	return (NULL);
+}
+
 void	destroy_at(t_stack **st, int i)
 {
 	t_stack	*tmp;

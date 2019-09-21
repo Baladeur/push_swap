@@ -120,6 +120,7 @@ SRC2	=	srcs-push_swap/push_swap.c \
 			srcs-push_swap/gnome_sort.c \
 			srcs-push_swap/bubble_sort.c \
 			srcs-push_swap/quicksort.c \
+			srcs-push_swap/quickbrute.c \
 			srcs-push_swap/partition_tools.c \
 			srcs-push_swap/insertion_sort.c
 

@@ -48,17 +48,19 @@ void		dupe_stack(t_stack *src, t_stack **dest, int b)
 
 static int	strnumcheck(char *av, int nb)
 {
+	int i;
 	int c1;
 	int c2;
 
-	c1 = av[0] == '-' || av[0] == '+' ? 1 : 0;
+	i = av[0] == '-' || av[0] == '+' ? 1 : 0;
+	c1 = 0;
 	c2 = 0;
-	while (ft_isdigit(av[c1]))
+	while (av[i] == '0')
+		i++;
+	while (ft_isalnum(av[i]) && ++i)
 		c1++;
 	while (nb != 0 && ++c2)
 		nb /= 10;
-	if (av[0] == '-' || av[0] == '+')
-		c1--;
 	return (c1 != c2);
 }
 
