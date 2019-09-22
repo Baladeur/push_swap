@@ -83,8 +83,6 @@ static void		r_quicksort(t_part *p, t_stack **mv, t_stack **a, t_stack **b)
 	int		k;
 	int		id;
 
-	if (p->ed - p->id <= 5)
-		quickbrute(p, mv, a, b);
 	if (is_part_sort(p, *a, *b) || (is_sort(*a) && !(*b)))
 		return ;
 	if (!(partitions = split_part(p, mv, a, b)))
