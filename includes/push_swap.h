@@ -52,13 +52,9 @@ int				secure_empty(t_stack **res, t_stack **a, t_stack **b, int i);
 
 int				rota_cleaner(t_stack **res, t_stack **a, t_stack **b, int i);
 
-void			print_stacks(t_stack *a, t_stack *b);
-
 int				exec_mv(t_stack **a, t_stack **b, int mv);
 
 t_stack			*get_at(t_stack *src, int i);
-
-t_stack			*find_nb(t_stack *st, int i);
 
 void			set_at(t_stack *src, int i, int v);
 
@@ -67,8 +63,6 @@ void			destroy_at(t_stack **st, int i);
 void			results_checker(t_stack **results, t_stack *orig);
 
 int				moveset_checker(t_stack *moveset, t_stack *orig);
-
-void			quickbrute(t_part *p, t_stack **mv, t_stack **a, t_stack **b);
 
 /*
 ** part tools
@@ -80,7 +74,6 @@ int				is_part_sort(t_part *part, t_stack *a, t_stack *b);
 
 int				part_median(t_part *part, t_stack *st);
 
-void			print_part(t_part *p, t_stack *st);
 /*
 ** stack moveset
 */

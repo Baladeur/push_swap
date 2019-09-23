@@ -88,31 +88,3 @@ int		stack_size(t_stack *st)
 		st = st->next;
 	return (i);
 }
-
-void	print_stacks(t_stack *a, t_stack *b)
-{
-	int k_a;
-	int k_b;
-	int size_a;
-	int size_b;
-
-	size_a = stack_size(a);
-	size_b = stack_size(b);
-	k_a = size_a;
-	k_b = size_b;
-	while (k_a > k_b)
-	{
-		ft_printf("%d\t|\t\n", get_at(a, k_a - 1)->value);
-		k_a--;
-	}
-	while (k_b > k_a)
-	{
-		ft_printf("\t|\t%d\n", get_at(b, k_b - 1)->value);
-		k_b--;
-	}
-	k_a++;
-	while (--k_a > 0)
-		ft_printf("%d\t|\t%d\n", get_at(a, k_a - 1)->value,
-					get_at(b, k_a - 1)->value);
-	ft_printf("-\t|\t-\nA\t|\tB\n");
-}

@@ -66,13 +66,3 @@ int		is_part_sort(t_part *part, t_stack *a, t_stack *b)
 	}
 	return (1);
 }
-
-void	print_part(t_part *p, t_stack *st)
-{
-	int k;
-
-	k = p->op - 1;
-	while (++k < p->ed)
-		ft_printf("%d\t", get_at(st, k)->value);
-	ft_printf("\n");
-}
