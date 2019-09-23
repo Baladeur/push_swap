@@ -93,8 +93,6 @@ int				rev_rotate(t_stack **st);
 ** stack sorter
 */
 
-int				sort_stack(t_stack **a, t_stack **b);
-
 int				is_sort(t_stack *st);
 
 int				is_rev_sort(t_stack *st);
