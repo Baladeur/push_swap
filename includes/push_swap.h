@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/libft.h"
+# define MOVE_SIZE 4
 
 typedef struct	s_stack
 {
@@ -35,6 +36,8 @@ typedef struct	s_part
 */
 
 int				add_to_stack(t_stack **st, int nb, int boolean);
+
+int				get_next_move(const int fd, char **line);
 
 void			destroy_stack(t_stack **st);
 

@@ -109,7 +109,8 @@ SRC		=	srcs/stack_moveset.c \
 			srcs/stack_tools_1.c \
 			srcs/stack_tools_2.c \
 			srcs/stack_tools_3.c \
-			srcs/stack_sorter.c
+			srcs/stack_sorter.c \
+			srcs/get_next_move.c
 
 SRC1	=	srcs-checker/checker.c
 

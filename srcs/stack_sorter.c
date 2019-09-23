@@ -43,10 +43,11 @@ static int	sort_loop(t_stack **a, t_stack **b, char *str, int len)
 int			sort_stack(t_stack **a, t_stack **b)
 {
 	char	*str;
+	int		bol;
 
-	while (get_next_line(0, &str) && ft_strlen(str))
+	while ((bol = get_next_move(0, &str)) && ft_strlen(str))
 	{
-		if (!(sort_loop(a, b, str, ft_strlen(str))))
+		if (!(sort_loop(a, b, str, ft_strlen(str))) || bol < 0)
 		{
 			free(str);
 			return (0);
