@@ -36,14 +36,22 @@ int			add_to_stack(t_stack **st, int nb, int boolean)
 	return (1);
 }
 
-void		dupe_stack(t_stack *src, t_stack **dest, int b)
+int			dupe_stack(t_stack *src, t_stack **dest, int b)
 {
-	if (src)
+	int i;
+	int size;
+
+	size = stack_size(src);
+	i = 0;
+	while (++i <= size)
 	{
-		if (src->next)
-			dupe_stack(src->next, dest, b);
-		add_to_stack(dest, src->value, b);
+		if (!(add_to_stack(dest, get_at(src, size - i)->value, b)))
+		{
+			destroy_stack(dest);
+			return (0);
+		}
 	}
+	return (1);
 }
 
 static int	strnumcheck(char *av, int nb)

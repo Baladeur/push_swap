@@ -112,10 +112,10 @@ t_stack			*quicksort(t_stack *orig)
 	moveset = NULL;
 	a = NULL;
 	b = NULL;
-	dupe_stack(orig, &a, 0);
-	if (!(init_part(&part, stack_size(a), 'A')))
+	if (!(dupe_stack(orig, &a, 0)) || !(init_part(&part, stack_size(a), 'A')))
 	{
-		add_to_stack(&moveset, -1, 0);
+		if (!(add_to_stack(&moveset, -1, 0)))
+			return (NULL);
 		return (moveset);
 	}
 	r_quicksort(part, &moveset, &a, &b);

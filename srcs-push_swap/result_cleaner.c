@@ -112,7 +112,7 @@ static void	moveset_cleaner(t_stack **res, t_stack **a, int sz, int i)
 	destroy_stack(&b);
 }
 
-void		results_cleaner(t_stack **res, t_stack *orig, int i)
+int			results_cleaner(t_stack **res, t_stack *orig, int i)
 {
 	t_stack	*a;
 	t_stack *res_back;
@@ -121,22 +121,27 @@ void		results_cleaner(t_stack **res, t_stack *orig, int i)
 	{
 		a = NULL;
 		res_back = NULL;
-		while (stack_size(orig) > 30 && i < 4)
-			i++;
-		dupe_stack(orig, &a, 0);
-		dupe_stack(res[i], &res_back, 1);
+		i = stack_size(orig) > 30 && i < 4 ? 4 : i;
+		if (!(dupe_stack(orig, &a, 0)) || !(dupe_stack(res[i], &res_back, 1)))
+			return (0);
 		moveset_cleaner(res + i, &a, stack_size(res[i]), 1);
 		destroy_stack(&a);
 		if (!(moveset_checker(res[i], orig)))
 		{
-			a = NULL;
-			dupe_stack(orig, &a, 0);
 			destroy_stack(res + i);
+			a = NULL;
+			if (!(dupe_stack(orig, &a, 0)))
+				return (0);
 			res[i] = res_back;
-			safer_cleaner(res + i, &a, stack_size(res[i]), orig);
+			if (!(safer_cleaner(res + i, &a, stack_size(res[i]), orig)))
+			{
+				destroy_stack(&a);
+				return (0);
+			}
 			destroy_stack(&a);
 		}
 		else
 			destroy_stack(&res_back);
 	}
+	return (1);
 }

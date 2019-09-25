@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-static void	go_to(t_stack **moveset, t_stack **a, int val)
+static int	go_to(t_stack **moveset, t_stack **a, int val)
 {
 	int	size;
 	int k;
@@ -27,12 +27,14 @@ static void	go_to(t_stack **moveset, t_stack **a, int val)
 			rev_rotate(a);
 		else
 			rotate(a);
-		add_to_stack(moveset, k > size / 2 ? 8 : 5, 1);
+		if (!(add_to_stack(moveset, k > size / 2 ? 8 : 5, 1)))
+			return (0);
 		k += k > size / 2 ? 1 : -1;
 	}
+	return (1);
 }
 
-static void	move_to(t_stack **moveset, t_stack **a, int i, int d)
+static int	move_to(t_stack **moveset, t_stack **a, int i, int d)
 {
 	t_stack	*b;
 	int		size;
@@ -41,17 +43,23 @@ static void	move_to(t_stack **moveset, t_stack **a, int i, int d)
 	b = NULL;
 	size = stack_size(*a);
 	top = get_at(*a, size - 1)->value;
-	go_to(moveset, a, i);
+	if (!(go_to(moveset, a, i)))
+		return (0);
 	push(a, &b);
-	add_to_stack(moveset, 4, 1);
-	go_to(moveset, a, d);
+	if (!(add_to_stack(moveset, 4, 1)) || !(go_to(moveset, a, d)))
+	{
+		destroy_stack(&b);
+		return (0);
+	}
 	push(&b, a);
-	add_to_stack(moveset, 3, 1);
-	if (d != top)
-		go_to(moveset, a, top);
+	if (!(add_to_stack(moveset, 3, 1)))
+		return (0);
+	if (d != top && !go_to(moveset, a, top))
+		return (0);
+	return (1);
 }
 
-static void	insertion_loop(t_stack **moveset, t_stack **a, int i)
+static int	insertion_loop(t_stack **moveset, t_stack **a, int i)
 {
 	int	smallest;
 	int size;
@@ -62,8 +70,8 @@ static void	insertion_loop(t_stack **moveset, t_stack **a, int i)
 	smallest = 2147483647;
 	size = stack_size(*a);
 	pos = -1;
-	c = 1;
-	while (c < i)
+	c = 0;
+	while (c++ >= 0 && c < i)
 	{
 		curr = get_at(*a, size - i + c)->value;
 		if (curr > get_at(*a, size - i)->value && curr < smallest)
@@ -71,12 +79,13 @@ static void	insertion_loop(t_stack **moveset, t_stack **a, int i)
 			pos = c;
 			smallest = curr;
 		}
-		c++;
 	}
 	if (pos < 0)
-		return ;
-	move_to(moveset, a, get_at(*a, size - i)->value,
-			get_at(*a, size - i + pos)->value);
+		return (1);
+	if (!(move_to(moveset, a, get_at(*a, size - i)->value,
+			get_at(*a, size - i + pos)->value)))
+		return (0);
+	return (1);
 }
 
 t_stack		*insertion_sort(t_stack *orig)
@@ -87,16 +96,21 @@ t_stack		*insertion_sort(t_stack *orig)
 
 	a = NULL;
 	moveset = NULL;
-	if (stack_size(orig) > 100)
+	if (stack_size(orig) > 100 || !(dupe_stack(orig, &a, 0)))
 	{
-		add_to_stack(&moveset, -1, 1);
+		if (!(add_to_stack(&moveset, -1, 1)))
+			return (NULL);
 		return (moveset);
 	}
-	dupe_stack(orig, &a, 0);
 	i = 1;
 	while (!(is_sort(a)) && i <= stack_size(a))
 	{
-		insertion_loop(&moveset, &a, i);
+		if (!(insertion_loop(&moveset, &a, i)))
+		{
+			destroy_stack(&a);
+			destroy_stack(&moveset);
+			return (NULL);
+		}
 		i++;
 	}
 	destroy_stack(&a);

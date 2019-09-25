@@ -41,15 +41,15 @@ int				get_next_move(const int fd, char **line);
 
 void			destroy_stack(t_stack **st);
 
-void			dupe_stack(t_stack *src, t_stack **dest, int b);
+int				dupe_stack(t_stack *src, t_stack **dest, int b);
 
 int				fill_stack(int ac, char **av, t_stack **a);
 
 int				stack_size(t_stack *st);
 
-void			results_cleaner(t_stack **res, t_stack *orig, int i);
+int				results_cleaner(t_stack **res, t_stack *orig, int i);
 
-void			safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o);
+int				safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o);
 
 int				secure_empty(t_stack **res, t_stack **a, t_stack **b, int i);
 
@@ -62,8 +62,6 @@ t_stack			*get_at(t_stack *src, int i);
 void			set_at(t_stack *src, int i, int v);
 
 void			destroy_at(t_stack **st, int i);
-
-void			results_checker(t_stack **results, t_stack *orig);
 
 int				moveset_checker(t_stack *moveset, t_stack *orig);
 

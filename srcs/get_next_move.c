@@ -18,7 +18,8 @@ static int	init_lst(const int fd, t_list **fds, t_list **pos)
 	{
 		if (!(*fds = (t_list *)malloc(sizeof(t_list))))
 			return (-1);
-		(*fds)->content = ft_strnew(MOVE_SIZE + 1);
+		if (!((*fds)->content = ft_strnew(MOVE_SIZE + 1)))
+			return (-1);
 		(*fds)->content_size = fd;
 		(*fds)->next = NULL;
 	}
@@ -30,7 +31,8 @@ static int	init_lst(const int fd, t_list **fds, t_list **pos)
 		if (!((*pos)->next = (t_list *)malloc(sizeof(t_list))))
 			return (-1);
 		(*pos) = (*pos)->next;
-		(*pos)->content = ft_strnew(MOVE_SIZE + 1);
+		if (!((*pos)->content = ft_strnew(MOVE_SIZE + 1)))
+			return (-1);
 		(*pos)->content_size = fd;
 		(*pos)->next = NULL;
 	}

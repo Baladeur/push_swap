@@ -41,7 +41,19 @@ static void	init_cleaner(t_stack **a, t_stack **b, t_stack **c, t_stack **d)
 	*d = NULL;
 }
 
-void		safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o)
+static int	safe_dupe(t_stack **res, t_stack **a, t_stack **dum, t_stack **d_a)
+{
+	if (!(dupe_stack(*res, dum, 1)))
+		return (0);
+	if (!(dupe_stack(*a, d_a, 0)))
+	{
+		destroy_stack(dum);
+		return (0);
+	}
+	return (1);
+}
+
+int			safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o)
 {
 	t_stack *b;
 	t_stack *dummy;
@@ -50,8 +62,8 @@ void		safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o)
 	int		mv[2][3];
 
 	init_cleaner(&b, &dummy, &d_b, &d_a);
-	dupe_stack(*res, &dummy, 1);
-	dupe_stack(*a, &d_a, 0);
+	if (!(safe_dupe(res, a, &dummy, &d_a)))
+		return (0);
 	mv[0][2] = 1;
 	mv[1][2] = 1;
 	while (mv[0][2] <= sz && (sz = stack_size(dummy)))
@@ -66,4 +78,5 @@ void		safer_cleaner(t_stack **res, t_stack **a, int sz, t_stack *o)
 	destroy_stack(&d_a);
 	destroy_stack(&d_b);
 	destroy_stack(&b);
+	return (1);
 }

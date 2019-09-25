@@ -23,7 +23,8 @@ static int	exception_ra(t_stack *orig)
 	sz = stack_size(orig);
 	i = get_at(orig, sz - 1)->value;
 	m = i;
-	dupe_stack(orig, &a, 0);
+	if (!(dupe_stack(orig, &a, 0)))
+		return (-1);
 	destroy_at(&a, sz - 1);
 	while (--sz)
 	{
@@ -39,7 +40,21 @@ static int	exception_ra(t_stack *orig)
 	return (0);
 }
 
-static void	gnome_loop(t_stack **a, t_stack **moveset, int size)
+static int	ascend_check(t_stack **a, t_stack **moveset, int b_ascend)
+{
+	if (!(is_sort(*a)))
+	{
+		if (!(add_to_stack(moveset, b_ascend ? 5 : 8, 1)))
+			return (0);
+		if ((b_ascend))
+			rotate(a);
+		else
+			rev_rotate(a);
+	}
+	return (1);
+}
+
+static int	gnome_loop(t_stack **a, t_stack **moveset, int size)
 {
 	int b_ascend;
 	int k;
@@ -50,22 +65,18 @@ static void	gnome_loop(t_stack **a, t_stack **moveset, int size)
 	{
 		if ((get_at(*a, size - 2))->value < (get_at(*a, size - 1))->value)
 		{
-			add_to_stack(moveset, 0, 1);
+			if (!(add_to_stack(moveset, 0, 1)))
+				return (0);
 			swap(*a);
 			b_ascend = 0;
 		}
 		if (!b_ascend && k == 0)
 			b_ascend = 1;
-		if (!(is_sort(*a)))
-		{
-			add_to_stack(moveset, b_ascend ? 5 : 8, 1);
-			if ((b_ascend))
-				rotate(a);
-			else
-				rev_rotate(a);
-		}
+		if (!(ascend_check(a, moveset, b_ascend)))
+			return (0);
 		k += b_ascend ? 1 : -1;
 	}
+	return (1);
 }
 
 t_stack		*gnome_sort(t_stack *orig)
@@ -73,23 +84,24 @@ t_stack		*gnome_sort(t_stack *orig)
 	t_stack	*a;
 	t_stack *moveset;
 	int		size;
+	int		err;
 
 	a = NULL;
 	moveset = NULL;
-	if (stack_size(orig) > 100)
+	if ((size = stack_size(orig)) > 100 || !(dupe_stack(orig, &a, 0))
+		|| (err = exception_ra(orig)))
 	{
-		add_to_stack(&moveset, -1, 1);
+		if (!(add_to_stack(&moveset, size < 100
+			&& err == 1 ? 5 : -1, 1)))
+			return (NULL);
 		return (moveset);
 	}
-	if (exception_ra(orig))
+	if (!(gnome_loop(&a, &moveset, size)))
 	{
-		add_to_stack(&moveset, 5, 1);
-		return (moveset);
+		destroy_stack(&a);
+		destroy_stack(&moveset);
+		return (NULL);
 	}
-	size = 0;
-	dupe_stack(orig, &a, 0);
-	size = stack_size(orig);
-	gnome_loop(&a, &moveset, size);
 	destroy_stack(&a);
 	return (moveset);
 }
