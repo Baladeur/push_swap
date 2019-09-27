@@ -75,6 +75,8 @@ int				is_part_sort(t_part *part, t_stack *a, t_stack *b);
 
 int				part_median(t_part *part, t_stack *st);
 
+int				destroy_parts(t_part **partitions);
+
 /*
 ** stack moveset
 */

@@ -40,24 +40,25 @@ static t_part	**init_split(t_part *part, t_stack *a, t_stack *b)
 	return (partitions);
 }
 
-static void		sub_split(int *i, t_stack **a, t_stack **b, t_stack **mv)
+static int		sub_split(int *i, t_stack **a, t_stack **b, t_stack **mv)
 {
 	while (i[3] > 0)
 	{
-		add_to_stack(mv, i[0] ? 8 : 9, 1);
+		if (!(add_to_stack(mv, i[0] ? 8 : 9, 1)))
+			return (0);
 		rev_rotate(i[0] ? a : b);
 		i[3]--;
 	}
+	return (1);
 }
 
 static t_part	**split_part(t_part *p, t_stack **mv, t_stack **a, t_stack **b)
 {
 	t_part	**partitions;
-	int		i[4];
-	int		med;
+	int		i[5];
 
 	i[0] = p->id == 'A' ? 1 : 0;
-	med = part_median(p, i[0] ? *a : *b);
+	i[4] = part_median(p, i[0] ? *a : *b);
 	if (!(partitions = init_split(p, *a, *b)))
 		return (NULL);
 	i[1] = 0;
@@ -65,41 +66,46 @@ static t_part	**split_part(t_part *p, t_stack **mv, t_stack **a, t_stack **b)
 	while (i[1] < partitions[1]->ed - partitions[1]->op)
 	{
 		i[2] = get_at(i[0] ? *a : *b, stack_size(i[0] ? *a : *b) - 1)->value;
-		if (((i[2] >= med && !i[0]) || (i[2] < med && i[0])) && ++i[1])
+		if (((i[2] >= i[4] && !i[0]) || (i[2] < i[4] && i[0])) && ++i[1])
 		{
-			add_to_stack(mv, i[0] ? 4 : 3, 1);
+			if (!(add_to_stack(mv, i[0] ? 4 : 3, 1)))
+				return (destroy_parts(partitions) ? NULL : NULL);
 			push(i[0] ? a : b, i[0] ? b : a);
 		}
-		else if (++i[3] && rotate(i[0] ? a : b))
-			add_to_stack(mv, i[0] ? 5 : 6, 1);
+		else if (++i[3] && rotate(i[0] ? a : b)
+			&& !(add_to_stack(mv, i[0] ? 5 : 6, 1)))
+			return (destroy_parts(partitions) ? NULL : NULL);
 	}
-	sub_split(i, a, b, mv);
+	if (!(sub_split(i, a, b, mv)))
+		return (destroy_parts(partitions) ? NULL : NULL);
 	return (partitions);
 }
 
-static void		r_quicksort(t_part *p, t_stack **mv, t_stack **a, t_stack **b)
+static int		r_quicksort(t_part *p, t_stack **mv, t_stack **a, t_stack **b)
 {
 	t_part	**partitions;
 	int		k;
 	int		id;
 
 	if (is_part_sort(p, *a, *b) || (is_sort(*a) && !(*b)))
-		return ;
+		return (1);
 	if (!(partitions = split_part(p, mv, a, b)))
-		return ;
-	r_quicksort(partitions[0], mv, a, b);
-	r_quicksort(partitions[1], mv, a, b);
+		return (0);
+	if (!(r_quicksort(partitions[0], mv, a, b)))
+		return (destroy_parts(partitions));
+	if (!(r_quicksort(partitions[1], mv, a, b)))
+		return (destroy_parts(partitions));
 	k = partitions[1]->op;
 	id = p->id == 'A' ? 1 : 0;
 	while (k < partitions[1]->ed)
 	{
 		push(id ? b : a, id ? a : b);
-		add_to_stack(mv, id ? 3 : 4, 1);
+		if (!(add_to_stack(mv, id ? 3 : 4, 1)))
+			return (destroy_parts(partitions));
 		k++;
 	}
-	free(partitions[0]);
-	free(partitions[1]);
-	free(partitions);
+	destroy_parts(partitions);
+	return (1);
 }
 
 t_stack			*quicksort(t_stack *orig)
@@ -118,7 +124,13 @@ t_stack			*quicksort(t_stack *orig)
 			return (NULL);
 		return (moveset);
 	}
-	r_quicksort(part, &moveset, &a, &b);
+	if (!(r_quicksort(part, &moveset, &a, &b)))
+	{
+		destroy_stack(&a);
+		destroy_stack(&b);
+		destroy_stack(&moveset);
+		return (NULL);
+	}
 	destroy_stack(&a);
 	destroy_stack(&b);
 	free(part);

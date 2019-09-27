@@ -12,6 +12,20 @@
 
 #include "../includes/push_swap.h"
 
+int			secure_empty(t_stack **res, t_stack **a, t_stack **b, int i)
+{
+	int id;
+	int mv;
+
+	if (*a && *b)
+		return (0);
+	mv = get_at(*res, stack_size(*res) - i)->value;
+	id = !(*a) ? 0 : 1;
+	if (mv == 0 + id || mv == 4 - id || mv == 5 + id || mv == 8 + id)
+		return (1);
+	return (0);
+}
+
 static void	clean_loop(t_stack **res, t_stack **a, t_stack **b, int *mv)
 {
 	int sz;

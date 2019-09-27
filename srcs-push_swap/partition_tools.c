@@ -12,6 +12,14 @@
 
 #include "../includes/push_swap.h"
 
+int		destroy_parts(t_part **partitions)
+{
+	free(partitions[0]);
+	free(partitions[1]);
+	free(partitions);
+	return (0);
+}
+
 int		part_median(t_part *part, t_stack *st)
 {
 	int g[2];

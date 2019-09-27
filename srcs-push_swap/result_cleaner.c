@@ -12,20 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-int			secure_empty(t_stack **res, t_stack **a, t_stack **b, int i)
-{
-	int id;
-	int mv;
-
-	if (*a && *b)
-		return (0);
-	mv = get_at(*res, stack_size(*res) - i)->value;
-	id = !(*a) ? 0 : 1;
-	if (mv == 0 + id || mv == 4 - id || mv == 5 + id || mv == 8 + id)
-		return (1);
-	return (0);
-}
-
 static int	rotation_replace(t_stack **res, t_stack *st, int *c, int i)
 {
 	t_stack	*mv;
@@ -112,36 +98,44 @@ static void	moveset_cleaner(t_stack **res, t_stack **a, int sz, int i)
 	destroy_stack(&b);
 }
 
+static int	clean_loop(t_stack **res, t_stack *orig, t_stack **a, int i)
+{
+	t_stack *res_back;
+
+	res_back = NULL;
+	if (!(dupe_stack(orig, a, 0)) || !(dupe_stack(res[i], &res_back, 1)))
+		return (0);
+	moveset_cleaner(res + i, a, stack_size(res[i]), 1);
+	destroy_stack(a);
+	if (!(moveset_checker(res[i], orig)))
+	{
+		destroy_stack(res + i);
+		*a = NULL;
+		if (!(dupe_stack(orig, a, 0)))
+			return (0);
+		res[i] = res_back;
+		if (!(safer_cleaner(res + i, a, stack_size(res[i]), orig)))
+		{
+			destroy_stack(a);
+			return (0);
+		}
+		destroy_stack(a);
+	}
+	else
+		destroy_stack(&res_back);
+	return (1);
+}
+
 int			results_cleaner(t_stack **res, t_stack *orig, int i)
 {
 	t_stack	*a;
-	t_stack *res_back;
 
 	while (++i < 5)
 	{
 		a = NULL;
-		res_back = NULL;
 		i = stack_size(orig) > 30 && i < 4 ? 4 : i;
-		if (!(dupe_stack(orig, &a, 0)) || !(dupe_stack(res[i], &res_back, 1)))
+		if (!(clean_loop(res, orig, &a, i)))
 			return (0);
-		moveset_cleaner(res + i, &a, stack_size(res[i]), 1);
-		destroy_stack(&a);
-		if (!(moveset_checker(res[i], orig)))
-		{
-			destroy_stack(res + i);
-			a = NULL;
-			if (!(dupe_stack(orig, &a, 0)))
-				return (0);
-			res[i] = res_back;
-			if (!(safer_cleaner(res + i, &a, stack_size(res[i]), orig)))
-			{
-				destroy_stack(&a);
-				return (0);
-			}
-			destroy_stack(&a);
-		}
-		else
-			destroy_stack(&res_back);
 	}
 	return (1);
 }
