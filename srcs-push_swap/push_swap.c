@@ -12,20 +12,22 @@
 
 #include "../includes/push_swap.h"
 
-static void	destroy_moveset(t_stack **moveset)
+static int	destroy_moveset(t_stack ***moveset)
 {
 	int i;
 
-	if (moveset)
+	if (*moveset)
 	{
 		i = 0;
 		while (i < 5)
 		{
-			destroy_stack(moveset + i);
+			destroy_stack(*moveset + i);
 			i++;
 		}
-		free(moveset);
+		free(*moveset);
+		*moveset = NULL;
 	}
+	return (0);
 }
 
 static void	print_moveset(t_stack *moveset)
@@ -75,7 +77,22 @@ static int	shortest_result(t_stack ***results)
 	}
 	if (shortest)
 		print_moveset((*results)[id]);
-	destroy_moveset(*results);
+	destroy_moveset(results);
+	return (1);
+}
+
+static int	algorithms(t_stack ***results, t_stack *a)
+{
+	if (!((*results)[0] = bubble_sort(a)))
+		return (destroy_moveset(results));
+	if (!((*results)[1] = gnome_sort(a)))
+		return (destroy_moveset(results));
+	if (!((*results)[2] = insertion_sort(a)))
+		return (destroy_moveset(results));
+	if (!((*results)[3] = selection_sort(a)))
+		return (destroy_moveset(results));
+	if (!((*results)[4] = quicksort(a)))
+		return (destroy_moveset(results));
 	return (1);
 }
 
@@ -95,11 +112,11 @@ int			main(int ac, char **av)
 	}
 	if (stack_size(a) > 1 && !is_sort(a))
 	{
-		results[0] = bubble_sort(a);
-		results[1] = gnome_sort(a);
-		results[2] = insertion_sort(a);
-		results[3] = selection_sort(a);
-		results[4] = quicksort(a);
+		if (!algorithms(&results, a))
+		{
+			destroy_stack(&a);
+			return (write(2, "Error\n", 6));
+		}
 		results_cleaner(results, a, -1);
 		destroy_stack(&a);
 		return (shortest_result(&results));
