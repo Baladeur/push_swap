@@ -155,15 +155,23 @@ $(NAME2):	$(LIBFT) $(SHARED) $(OBJLIB) $(OBJ) $(OBJ2)
 	@$(CC) $(CFLAGS) $(LIBFT) $(SHARED) $(OBJ2) -o $(NAME2)
 
 clean:
+	@echo "Deleting libft objects"
 	@/bin/rm -Rf $(OBJLIB)
+	@echo "Deleting shared objects"
 	@/bin/rm -Rf $(OBJ)
+	@echo "Deleting checker objects"
 	@/bin/rm -Rf $(OBJ1)
+	@echo "Deleting push_swap objects"
 	@/bin/rm -Rf $(OBJ2)
 
 fclean:		clean
+	@echo "Deleting libft.a"
 	@/bin/rm -Rf $(LIBFT)
+	@echo "Deleting push_swap.a"
 	@/bin/rm -Rf $(SHARED)
+	@echo "Deleting checker program"
 	@/bin/rm -Rf $(NAME1)
+	@echo "Deleting push_swap program"
 	@/bin/rm -Rf $(NAME2)
 
 re: 		fclean all
