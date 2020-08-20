@@ -1,7 +1,9 @@
 # push_swap
 
-Push_swap is a basic approach at a sorting algorithm with various constraints.
-You can only operate on two stacks. The goal is to have the first stack sorted, while the second stack must be empty by the end of the algorithm, while using the least amount of operations possible.
+Push_swap is a basic approach at a sorting algorithm with some constraints :
+You can only operate on two stacks, and you have limited kinds of operations you can do on these stacks.
+
+The goal is to have the first stack sorted, while the second stack must be empty by the end of the algorithm, while using the least amount of operations possible.
 To do so, you have access to a number of operations :
 - You can rotate a stack, moving the top element to the bottom, or putting the bottom element at the top of the stack
 - You can swap the 2 elements at the top of a stack
